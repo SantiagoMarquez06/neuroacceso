@@ -1,0 +1,13 @@
+[project]
+name = "neuroacceso"
+version = "0.1.0"
+description = "Control del PC y comunicación manos libres con Emotiv EPOC X"
+requires-python = ">=3.10"
+dependencies = ["websocket-client>=1.6", "pyautogui>=0.9.54", "pyttsx3>=2.90", "python-dotenv>=1.0"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

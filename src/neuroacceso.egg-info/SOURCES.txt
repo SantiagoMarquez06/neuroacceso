@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/neuroacceso/__init__.py
+src/neuroacceso/__main__.py
+src/neuroacceso/comunicador.py
+src/neuroacceso/config.py
+src/neuroacceso/cortex_client.py
+src/neuroacceso/gestos.py
+src/neuroacceso/head_mouse.py
+src/neuroacceso.egg-info/PKG-INFO
+src/neuroacceso.egg-info/SOURCES.txt
+src/neuroacceso.egg-info/dependency_links.txt
+src/neuroacceso.egg-info/requires.txt
+src/neuroacceso.egg-info/top_level.txt
