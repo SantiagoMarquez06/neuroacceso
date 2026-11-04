@@ -56,6 +56,12 @@ flowchart TB
 - **Voz:** `pyttsx3` (voces del sistema, sin internet).
 - **Modo simulación:** la barra espaciadora reemplaza al gesto, para desarrollar sin el casco.
 
+### `app.py`
+Interfaz principal con 4 pantallas: **Estado del casco** (conexión, batería, mapa de contacto de los 14 sensores, orientación de la cabeza, último gesto y registro de eventos), **Práctica de puntería** (10 objetivos; mide tiempo, precisión y objetivos/minuto), **Comunicador** (integrado; el cursor se bloquea en esta pestaña y la tecla ◀ SALIR vuelve al inicio) y **Configuración** (deslizadores que cambian los parámetros en vivo).
+
+### `simulador.py`
+Servidor WebSocket que imita al servicio Cortex (mismo JSON-RPC y mismas columnas de los streams) con un "EPOC X simulado" controlado por teclado. Permite demos y desarrollo sin casco, y es la base de las pruebas de punta a punta. Ver [demo.md](demo.md).
+
 ### `config.py`
 Todos los parámetros ajustables en un solo sitio: sensibilidad, zona muerta, umbrales, mapeo de gestos, tiempos de barrido, frases rápidas.
 

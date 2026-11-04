@@ -11,6 +11,8 @@ Duración total estimada: **9–12 semanas**. Cada fase termina con una demostra
 | **Interfaz / comunicador** | `comunicador.py`, diseño de la pantalla, voz, frases rápidas |
 | **Pruebas y documentación** | Protocolo de pruebas, métricas, encuestas SUS, informe y presentación |
 
+> **Estado actual:** ya existe un prototipo funcional (interfaz de 4 pantallas, cursor, gestos, comunicador, simulador y pruebas automáticas) validado con el **casco simulado**. Las fases siguientes consisten en validarlo y ajustarlo con el **EPOC X real** y con usuarios.
+
 ## Fase 0 — Preparación (semana 1)
 - [ ] Crear EmotivID, instalar EMOTIV Launcher y EmotivBCI.
 - [ ] Registrar la Cortex App y obtener Client ID / Secret.

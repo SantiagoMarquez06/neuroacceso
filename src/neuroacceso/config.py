@@ -9,6 +9,7 @@ load_dotenv()
 # --- Credenciales (desde .env, nunca en el código) -------------------------
 CLIENT_ID = os.getenv("EMOTIV_CLIENT_ID", "")
 CLIENT_SECRET = os.getenv("EMOTIV_CLIENT_SECRET", "")
+CORTEX_URL = os.getenv("EMOTIV_CORTEX_URL", "wss://localhost:6868")
 
 # --- Cursor con la cabeza ---------------------------------------------------
 GANANCIA_X = 25.0         # píxeles por grado (cuaterniones) o por unidad de giroscopio

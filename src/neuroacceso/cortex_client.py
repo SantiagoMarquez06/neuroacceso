@@ -47,6 +47,9 @@ class CortexClient:
         self._callbacks: dict[str, list[Callback]] = {}
         self._opened = threading.Event()
         self._ws: websocket.WebSocketApp | None = None
+        self._cerrando = False
+        # Se llama si Cortex cierra la conexión inesperadamente (p. ej. se cerró el Launcher).
+        self.al_desconectar: Callable[[], None] | None = None
 
     # ------------------------------------------------------------------ conexión
     def conectar(self, timeout: float = 10) -> None:
@@ -55,7 +58,7 @@ class CortexClient:
             on_open=lambda ws: self._opened.set(),
             on_message=self._on_message,
             on_error=lambda ws, err: log.error("WebSocket: %s", err),
-            on_close=lambda ws, code, msg: log.info("Conexión con Cortex cerrada"),
+            on_close=self._on_close,
         )
         # Cortex usa un certificado autofirmado en localhost.
         hilo = threading.Thread(
@@ -70,8 +73,14 @@ class CortexClient:
             )
 
     def cerrar(self) -> None:
+        self._cerrando = True
         if self._ws:
             self._ws.close()
+
+    def _on_close(self, ws, code, msg) -> None:
+        log.info("Conexión con Cortex cerrada")
+        if self._opened.is_set() and not self._cerrando and self.al_desconectar:
+            self.al_desconectar()
 
     # -------------------------------------------------------------- JSON-RPC
     def call(self, method: str, params: dict | None = None, timeout: float = 15) -> Any:

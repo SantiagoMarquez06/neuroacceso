@@ -26,6 +26,21 @@ Las personas con movilidad reducida severa (lesión medular, ELA, parálisis cer
 
 **Costo: $0.** Solo usa el casco existente, un PC y software gratuito.
 
+### 🎬 Demo sin casco
+
+```bash
+pip install -e ".[demo]"
+python -m neuroacceso --demo
+```
+
+Abre la aplicación conectada a un **casco simulado** que habla el mismo protocolo que Emotiv Cortex: las flechas mueven la cabeza y las teclas C / Q / E hacen los gestos. Guion de presentación y detalles en **[docs/demo.md](docs/demo.md)**.
+
+| Estado del casco | Comunicador |
+|---|---|
+| ![Estado del casco](docs/img/01-estado.png) | ![Comunicador](docs/img/03-comunicador.png) |
+| **Práctica de puntería** | **Configuración** |
+| ![Práctica](docs/img/02-practica.png) | ![Configuración](docs/img/04-configuracion.png) |
+
 ## 3. ¿Por qué es factible?
 
 - El EPOC X incluye **gratis la API básica de Emotiv (Cortex)**, que entrega en tiempo real:
@@ -70,9 +85,12 @@ Detalle completo en [docs/arquitectura.md](docs/arquitectura.md) y [docs/cortex-
 ```
 neuroacceso/
 ├── README.md                  ← esta propuesta
+├── pyproject.toml             ← paquete y dependencias (extras: demo, dev)
 ├── requirements.txt           ← dependencias de Python
 ├── .env.example               ← plantilla de credenciales de Emotiv
 ├── docs/
+│   ├── demo.md                ← demo sin casco + guion de presentación
+│   ├── img/                   ← capturas de pantalla
 │   ├── guia-inicio.md         ← paso a paso para dejar todo funcionando
 │   ├── arquitectura.md        ← diseño del sistema y módulos
 │   ├── cortex-api.md          ← resumen técnico de la API de Emotiv
@@ -86,7 +104,11 @@ neuroacceso/
     ├── head_mouse.py          ← cursor controlado con la cabeza
     ├── gestos.py              ← traduce expresiones faciales a acciones
     ├── comunicador.py         ← teclado con barrido + voz
+    ├── app.py                 ← interfaz principal (4 pantallas)
+    ├── simulador.py           ← Cortex simulado para demos y desarrollo sin casco
     └── __main__.py            ← punto de entrada
+tests/
+└── test_neuroacceso.py        ← pruebas unitarias y de punta a punta con el simulador
 ```
 
 ## 7. Inicio rápido
@@ -104,12 +126,17 @@ copy .env.example .env          # y poner el Client ID / Secret de Emotiv
 # 1) Probar que llegan datos del casco
 python scripts/probar_conexion.py
 
-# 2) Cursor manos libres
-python -m neuroacceso --modo cursor
+# 2) Aplicación completa (estado, puntería, comunicador, configuración)
+python -m neuroacceso
 
-# 3) Comunicador (con --simular se usa la barra espaciadora en vez del casco)
-python -m neuroacceso --modo comunicador
-python -m neuroacceso --modo comunicador --simular
+# Otras formas de ejecutarlo
+python -m neuroacceso --demo                      # sin casco (simulador)
+python -m neuroacceso --modo cursor               # solo cursor, sin interfaz
+python -m neuroacceso --modo comunicador --simular  # comunicador con la barra espaciadora
+
+# Pruebas automáticas
+pip install -e ".[dev]"
+python -m pytest -q
 ```
 
 ## 8. Plan de trabajo (resumen)
