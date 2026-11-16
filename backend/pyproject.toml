@@ -29,6 +29,7 @@ packages = ["src/neuroacceso_motor"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+filterwarnings = ["ignore:Using `httpx`:DeprecationWarning"]
 
 [tool.ruff]
 line-length = 100
@@ -40,3 +41,4 @@ select = ["E", "F", "W", "I", "B", "UP"]
 [tool.mypy]
 python_version = "3.12"
 ignore_missing_imports = true
+plugins = ["pydantic.mypy"]

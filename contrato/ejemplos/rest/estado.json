@@ -1,0 +1,15 @@
+{
+  "conexion": {
+    "estado": "conectado",
+    "casco_id": "EPOCX-SIMULADO",
+    "detalle": null
+  },
+  "modo": "cursor",
+  "pausado": false,
+  "calibrado": true,
+  "perfil_activo_id": "p-1",
+  "latencia_ms": {
+    "p50": 0.0,
+    "p95": 0.0
+  }
+}

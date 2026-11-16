@@ -1,0 +1,65 @@
+{
+  "properties": {
+    "estado": {
+      "default": "desconectado",
+      "enum": [
+        "desconectado",
+        "conectando",
+        "conectado",
+        "error"
+      ],
+      "title": "Estado",
+      "type": "string"
+    },
+    "casco_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Casco Id"
+    },
+    "detalle": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detalle"
+    },
+    "codigo": {
+      "anyOf": [
+        {
+          "enum": [
+            "CORTEX_NO_DISPONIBLE",
+            "APP_NO_APROBADA",
+            "SIN_CASCO",
+            "CASCO_DESCONECTADO",
+            "TOKEN_CORTEX_EXPIRADO",
+            "PERFIL_NO_ENCONTRADO",
+            "MODO_INVALIDO",
+            "VALIDACION",
+            "NO_AUTORIZADO",
+            "ORIGEN_NO_PERMITIDO"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Codigo"
+    }
+  },
+  "title": "EvConexion",
+  "type": "object"
+}

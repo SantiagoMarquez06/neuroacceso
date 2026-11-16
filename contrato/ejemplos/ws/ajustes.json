@@ -1,0 +1,57 @@
+{
+  "v": 1,
+  "tipo": "ajustes",
+  "seq": 10,
+  "t": 1763300000010,
+  "datos": {
+    "perfil_id": "p-1",
+    "ajustes": {
+      "version": 1,
+      "cursor": {
+        "ganancia_x": 25.0,
+        "ganancia_y": 25.0,
+        "zona_muerta": 0.3,
+        "suavizado": 0.5,
+        "invertir_x": false,
+        "invertir_y": false
+      },
+      "gestos": {
+        "umbral": 0.4,
+        "cooldown_ms": 1000,
+        "mapeo": {
+          "cursor": {
+            "clench": "clic",
+            "winkR": "clic_derecho",
+            "winkL": "pausar"
+          },
+          "comunicador": {
+            "clench": "seleccionar",
+            "winkR": "seleccionar"
+          }
+        },
+        "gesto_rescate": "surprise"
+      },
+      "dwell": {
+        "activo": false,
+        "ms": 1000,
+        "radio_px": 30
+      },
+      "comunicador": {
+        "tiempo_barrido_ms": 1200,
+        "frases": [
+          "Sí",
+          "No",
+          "Tengo sed",
+          "Tengo dolor",
+          "Necesito ayuda",
+          "Gracias"
+        ],
+        "disposicion": "abc"
+      },
+      "voz": {
+        "voz_id": null,
+        "velocidad": 150
+      }
+    }
+  }
+}

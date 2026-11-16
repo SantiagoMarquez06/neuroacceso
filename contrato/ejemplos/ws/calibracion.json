@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "tipo": "calibracion",
+  "seq": 9,
+  "t": 1763300000009,
+  "datos": {
+    "estado": "en_curso",
+    "progreso": 0.4,
+    "instruccion": "Mira el punto central y no te muevas"
+  }
+}

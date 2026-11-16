@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "yaw": {
+      "title": "Yaw",
+      "type": "number"
+    },
+    "pitch": {
+      "title": "Pitch",
+      "type": "number"
+    },
+    "calibrado": {
+      "title": "Calibrado",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "yaw",
+    "pitch",
+    "calibrado"
+  ],
+  "title": "EvOrientacion",
+  "type": "object"
+}

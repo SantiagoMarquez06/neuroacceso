@@ -1,0 +1,35 @@
+{
+  "properties": {
+    "bateria_pct": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Bateria Pct",
+      "type": "integer"
+    },
+    "senal": {
+      "title": "Senal",
+      "type": "number"
+    },
+    "contacto": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Contacto",
+      "type": "object"
+    },
+    "calidad_global": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Calidad Global",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "bateria_pct",
+    "senal",
+    "contacto",
+    "calidad_global"
+  ],
+  "title": "EvDispositivo",
+  "type": "object"
+}

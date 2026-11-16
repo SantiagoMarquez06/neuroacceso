@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "tipo": "gesto",
+  "seq": 5,
+  "t": 1763300000005,
+  "datos": {
+    "gesto": "clench",
+    "zona": "inferior",
+    "potencia": 0.82
+  }
+}
