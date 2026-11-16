@@ -1,0 +1,310 @@
+{
+  "$defs": {
+    "Ajustes": {
+      "properties": {
+        "version": {
+          "const": 1,
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "cursor": {
+          "$ref": "#/$defs/AjustesCursor",
+          "default": {
+            "ganancia_x": 25.0,
+            "ganancia_y": 25.0,
+            "zona_muerta": 0.3,
+            "suavizado": 0.5,
+            "invertir_x": false,
+            "invertir_y": false
+          }
+        },
+        "gestos": {
+          "$ref": "#/$defs/AjustesGestos",
+          "default": {
+            "umbral": 0.4,
+            "cooldown_ms": 1000,
+            "mapeo": {
+              "comunicador": {
+                "clench": "seleccionar",
+                "winkR": "seleccionar"
+              },
+              "cursor": {
+                "clench": "clic",
+                "winkL": "pausar",
+                "winkR": "clic_derecho"
+              }
+            },
+            "gesto_rescate": "surprise"
+          }
+        },
+        "dwell": {
+          "$ref": "#/$defs/AjustesDwell",
+          "default": {
+            "activo": false,
+            "ms": 1000,
+            "radio_px": 30
+          }
+        },
+        "comunicador": {
+          "$ref": "#/$defs/AjustesComunicador",
+          "default": {
+            "tiempo_barrido_ms": 1200,
+            "frases": [
+              "Sí",
+              "No",
+              "Tengo sed",
+              "Tengo dolor",
+              "Necesito ayuda",
+              "Gracias"
+            ],
+            "disposicion": "abc"
+          }
+        },
+        "voz": {
+          "$ref": "#/$defs/AjustesVoz",
+          "default": {
+            "voz_id": null,
+            "velocidad": 150
+          }
+        }
+      },
+      "title": "Ajustes",
+      "type": "object"
+    },
+    "AjustesComunicador": {
+      "properties": {
+        "tiempo_barrido_ms": {
+          "default": 1200,
+          "maximum": 5000,
+          "minimum": 300,
+          "title": "Tiempo Barrido Ms",
+          "type": "integer"
+        },
+        "frases": {
+          "default": [
+            "Sí",
+            "No",
+            "Tengo sed",
+            "Tengo dolor",
+            "Necesito ayuda",
+            "Gracias"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Frases",
+          "type": "array"
+        },
+        "disposicion": {
+          "default": "abc",
+          "enum": [
+            "abc",
+            "frecuencia"
+          ],
+          "title": "Disposicion",
+          "type": "string"
+        }
+      },
+      "title": "AjustesComunicador",
+      "type": "object"
+    },
+    "AjustesCursor": {
+      "properties": {
+        "ganancia_x": {
+          "default": 25,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Ganancia X",
+          "type": "number"
+        },
+        "ganancia_y": {
+          "default": 25,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Ganancia Y",
+          "type": "number"
+        },
+        "zona_muerta": {
+          "default": 0.3,
+          "maximum": 5,
+          "minimum": 0,
+          "title": "Zona Muerta",
+          "type": "number"
+        },
+        "suavizado": {
+          "default": 0.5,
+          "maximum": 0.95,
+          "minimum": 0,
+          "title": "Suavizado",
+          "type": "number"
+        },
+        "invertir_x": {
+          "default": false,
+          "title": "Invertir X",
+          "type": "boolean"
+        },
+        "invertir_y": {
+          "default": false,
+          "title": "Invertir Y",
+          "type": "boolean"
+        }
+      },
+      "title": "AjustesCursor",
+      "type": "object"
+    },
+    "AjustesDwell": {
+      "properties": {
+        "activo": {
+          "default": false,
+          "title": "Activo",
+          "type": "boolean"
+        },
+        "ms": {
+          "default": 1000,
+          "maximum": 5000,
+          "minimum": 300,
+          "title": "Ms",
+          "type": "integer"
+        },
+        "radio_px": {
+          "default": 30,
+          "maximum": 200,
+          "minimum": 5,
+          "title": "Radio Px",
+          "type": "integer"
+        }
+      },
+      "title": "AjustesDwell",
+      "type": "object"
+    },
+    "AjustesGestos": {
+      "properties": {
+        "umbral": {
+          "default": 0.4,
+          "maximum": 1,
+          "minimum": 0.05,
+          "title": "Umbral",
+          "type": "number"
+        },
+        "cooldown_ms": {
+          "default": 1000,
+          "maximum": 5000,
+          "minimum": 100,
+          "title": "Cooldown Ms",
+          "type": "integer"
+        },
+        "mapeo": {
+          "$ref": "#/$defs/MapeoGestos",
+          "default": {
+            "cursor": {
+              "clench": "clic",
+              "winkL": "pausar",
+              "winkR": "clic_derecho"
+            },
+            "comunicador": {
+              "clench": "seleccionar",
+              "winkR": "seleccionar"
+            }
+          }
+        },
+        "gesto_rescate": {
+          "default": "surprise",
+          "title": "Gesto Rescate",
+          "type": "string"
+        }
+      },
+      "title": "AjustesGestos",
+      "type": "object"
+    },
+    "AjustesVoz": {
+      "properties": {
+        "voz_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Voz Id"
+        },
+        "velocidad": {
+          "default": 150,
+          "maximum": 300,
+          "minimum": 50,
+          "title": "Velocidad",
+          "type": "integer"
+        }
+      },
+      "title": "AjustesVoz",
+      "type": "object"
+    },
+    "MapeoGestos": {
+      "properties": {
+        "cursor": {
+          "additionalProperties": {
+            "enum": [
+              "clic",
+              "clic_derecho",
+              "doble_clic",
+              "pausar",
+              "seleccionar",
+              "atras",
+              "cambiar_modo",
+              "ninguna"
+            ],
+            "type": "string"
+          },
+          "default": {
+            "clench": "clic",
+            "winkR": "clic_derecho",
+            "winkL": "pausar"
+          },
+          "title": "Cursor",
+          "type": "object"
+        },
+        "comunicador": {
+          "additionalProperties": {
+            "enum": [
+              "clic",
+              "clic_derecho",
+              "doble_clic",
+              "pausar",
+              "seleccionar",
+              "atras",
+              "cambiar_modo",
+              "ninguna"
+            ],
+            "type": "string"
+          },
+          "default": {
+            "clench": "seleccionar",
+            "winkR": "seleccionar"
+          },
+          "title": "Comunicador",
+          "type": "object"
+        }
+      },
+      "title": "MapeoGestos",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "perfil_id": {
+      "title": "Perfil Id",
+      "type": "string"
+    },
+    "ajustes": {
+      "$ref": "#/$defs/Ajustes"
+    }
+  },
+  "required": [
+    "perfil_id",
+    "ajustes"
+  ],
+  "title": "EvAjustes",
+  "type": "object"
+}

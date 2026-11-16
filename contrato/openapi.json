@@ -1,0 +1,126 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "NeuroAcceso — motor",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/salud": {
+      "get": {
+        "summary": "Salud",
+        "operationId": "salud_api_v1_salud_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salud"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "enum": [
+              "CORTEX_NO_DISPONIBLE",
+              "APP_NO_APROBADA",
+              "SIN_CASCO",
+              "CASCO_DESCONECTADO",
+              "TOKEN_CORTEX_EXPIRADO",
+              "PERFIL_NO_ENCONTRADO",
+              "MODO_INVALIDO",
+              "VALIDACION",
+              "NO_AUTORIZADO",
+              "ORIGEN_NO_PERMITIDO"
+            ],
+            "title": "Codigo"
+          },
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje"
+          },
+          "detalle": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detalle"
+          }
+        },
+        "type": "object",
+        "required": [
+          "codigo",
+          "mensaje"
+        ],
+        "title": "Error"
+      },
+      "Salud": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "api_version": {
+            "type": "integer",
+            "title": "Api Version",
+            "default": 1
+          },
+          "fuente": {
+            "type": "string",
+            "enum": [
+              "cortex",
+              "simulador",
+              "replay"
+            ],
+            "title": "Fuente"
+          },
+          "demo": {
+            "type": "boolean",
+            "title": "Demo"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "fuente",
+          "demo"
+        ],
+        "title": "Salud"
+      }
+    }
+  }
+}

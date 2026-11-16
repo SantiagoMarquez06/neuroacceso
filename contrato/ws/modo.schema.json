@@ -1,0 +1,37 @@
+{
+  "properties": {
+    "modo": {
+      "enum": [
+        "desconectado",
+        "calibrando",
+        "cursor",
+        "comunicador",
+        "pausa",
+        "entrenando"
+      ],
+      "title": "Modo",
+      "type": "string"
+    },
+    "pausado": {
+      "title": "Pausado",
+      "type": "boolean"
+    },
+    "motivo": {
+      "enum": [
+        "usuario",
+        "gesto_rescate",
+        "ui_desconectada",
+        "calibracion"
+      ],
+      "title": "Motivo",
+      "type": "string"
+    }
+  },
+  "required": [
+    "modo",
+    "pausado",
+    "motivo"
+  ],
+  "title": "EvModo",
+  "type": "object"
+}

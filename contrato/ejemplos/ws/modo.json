@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "tipo": "modo",
+  "seq": 8,
+  "t": 1763300000008,
+  "datos": {
+    "modo": "comunicador",
+    "pausado": false,
+    "motivo": "usuario"
+  }
+}

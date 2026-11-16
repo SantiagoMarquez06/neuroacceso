@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "accion": {
+      "enum": [
+        "seleccionar",
+        "atras"
+      ],
+      "title": "Accion",
+      "type": "string"
+    }
+  },
+  "required": [
+    "accion"
+  ],
+  "title": "EvEntrada",
+  "type": "object"
+}

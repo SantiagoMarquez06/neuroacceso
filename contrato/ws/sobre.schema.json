@@ -1,0 +1,36 @@
+{
+  "description": "Envoltorio de todo mensaje WebSocket (servidor → cliente).",
+  "properties": {
+    "v": {
+      "const": 1,
+      "default": 1,
+      "title": "V",
+      "type": "integer"
+    },
+    "tipo": {
+      "title": "Tipo",
+      "type": "string"
+    },
+    "seq": {
+      "title": "Seq",
+      "type": "integer"
+    },
+    "t": {
+      "title": "T",
+      "type": "integer"
+    },
+    "datos": {
+      "additionalProperties": true,
+      "title": "Datos",
+      "type": "object"
+    }
+  },
+  "required": [
+    "tipo",
+    "seq",
+    "t",
+    "datos"
+  ],
+  "title": "Sobre",
+  "type": "object"
+}

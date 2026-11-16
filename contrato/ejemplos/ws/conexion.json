@@ -1,0 +1,12 @@
+{
+  "v": 1,
+  "tipo": "conexion",
+  "seq": 2,
+  "t": 1763300000002,
+  "datos": {
+    "estado": "conectado",
+    "casco_id": "EPOCX-SIMULADO",
+    "detalle": null,
+    "codigo": null
+  }
+}

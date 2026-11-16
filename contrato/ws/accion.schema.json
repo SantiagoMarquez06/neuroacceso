@@ -1,0 +1,88 @@
+{
+  "$defs": {
+    "OrigenAccion": {
+      "properties": {
+        "tipo": {
+          "enum": [
+            "gesto",
+            "mental",
+            "dwell",
+            "interfaz"
+          ],
+          "title": "Tipo",
+          "type": "string"
+        },
+        "nombre": {
+          "title": "Nombre",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tipo",
+        "nombre"
+      ],
+      "title": "OrigenAccion",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accion": {
+      "enum": [
+        "clic",
+        "clic_derecho",
+        "doble_clic",
+        "pausar",
+        "seleccionar",
+        "atras",
+        "cambiar_modo",
+        "ninguna"
+      ],
+      "title": "Accion",
+      "type": "string"
+    },
+    "origen": {
+      "$ref": "#/$defs/OrigenAccion"
+    },
+    "modo": {
+      "enum": [
+        "desconectado",
+        "calibrando",
+        "cursor",
+        "comunicador",
+        "pausa",
+        "entrenando"
+      ],
+      "title": "Modo",
+      "type": "string"
+    },
+    "ejecutada": {
+      "title": "Ejecutada",
+      "type": "boolean"
+    },
+    "motivo": {
+      "anyOf": [
+        {
+          "enum": [
+            "pausado",
+            "cooldown",
+            "bajo_umbral"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Motivo"
+    }
+  },
+  "required": [
+    "accion",
+    "origen",
+    "modo",
+    "ejecutada"
+  ],
+  "title": "EvAccion",
+  "type": "object"
+}

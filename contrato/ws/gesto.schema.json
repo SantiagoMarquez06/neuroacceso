@@ -1,0 +1,29 @@
+{
+  "properties": {
+    "gesto": {
+      "title": "Gesto",
+      "type": "string"
+    },
+    "zona": {
+      "enum": [
+        "ojos",
+        "superior",
+        "inferior",
+        "mental"
+      ],
+      "title": "Zona",
+      "type": "string"
+    },
+    "potencia": {
+      "title": "Potencia",
+      "type": "number"
+    }
+  },
+  "required": [
+    "gesto",
+    "zona",
+    "potencia"
+  ],
+  "title": "EvGesto",
+  "type": "object"
+}

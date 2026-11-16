@@ -1,0 +1,35 @@
+{
+  "properties": {
+    "codigo": {
+      "enum": [
+        "CORTEX_NO_DISPONIBLE",
+        "APP_NO_APROBADA",
+        "SIN_CASCO",
+        "CASCO_DESCONECTADO",
+        "TOKEN_CORTEX_EXPIRADO",
+        "PERFIL_NO_ENCONTRADO",
+        "MODO_INVALIDO",
+        "VALIDACION",
+        "NO_AUTORIZADO",
+        "ORIGEN_NO_PERMITIDO"
+      ],
+      "title": "Codigo",
+      "type": "string"
+    },
+    "mensaje": {
+      "title": "Mensaje",
+      "type": "string"
+    },
+    "recuperable": {
+      "title": "Recuperable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "codigo",
+    "mensaje",
+    "recuperable"
+  ],
+  "title": "EvError",
+  "type": "object"
+}

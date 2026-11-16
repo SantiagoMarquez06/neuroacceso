@@ -1,6 +1,6 @@
 # API v1 — borrador
 
-> **Estado: BORRADOR.** Se revisa entre los dos y se congela al final de la semana 1 (F0), pasándolo a `openapi.yaml` + JSON Schema. Hasta entonces, cualquiera de los dos puede proponer cambios.
+> **Estado: v1.0 propuesta para aprobación.** La versión formal y ejecutable está en `openapi.json`, `ws/*.schema.json` y `ejemplos/`, generados desde el código del motor. Este documento la describe en prosa.
 
 ## Generalidades
 - **Base REST:** `http://127.0.0.1:{puerto}/api/v1`
@@ -19,6 +19,8 @@
 | `PERFIL_NO_ENCONTRADO` | El perfil no existe |
 | `MODO_INVALIDO` | Cambio de modo no permitido en el estado actual |
 | `VALIDACION` | El cuerpo de la petición no es válido |
+| `NO_AUTORIZADO` | Falta el token o no es válido (HTTP 401; en WebSocket, cierre 1008) |
+| `ORIGEN_NO_PERMITIDO` | El `Origin` o el `Host` de la petición no están permitidos (HTTP 403 / 400) |
 
 ## REST
 

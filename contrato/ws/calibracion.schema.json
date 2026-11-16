@@ -1,0 +1,31 @@
+{
+  "properties": {
+    "estado": {
+      "enum": [
+        "en_curso",
+        "completada",
+        "fallida",
+        "cancelada"
+      ],
+      "title": "Estado",
+      "type": "string"
+    },
+    "progreso": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Progreso",
+      "type": "number"
+    },
+    "instruccion": {
+      "title": "Instruccion",
+      "type": "string"
+    }
+  },
+  "required": [
+    "estado",
+    "progreso",
+    "instruccion"
+  ],
+  "title": "EvCalibracion",
+  "type": "object"
+}

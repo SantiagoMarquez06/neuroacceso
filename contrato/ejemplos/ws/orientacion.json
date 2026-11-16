@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "tipo": "orientacion",
+  "seq": 4,
+  "t": 1763300000004,
+  "datos": {
+    "yaw": -3.5,
+    "pitch": 1.2,
+    "calibrado": true
+  }
+}

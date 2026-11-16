@@ -1,0 +1,16 @@
+{
+  "v": 1,
+  "tipo": "accion",
+  "seq": 6,
+  "t": 1763300000006,
+  "datos": {
+    "accion": "clic",
+    "origen": {
+      "tipo": "gesto",
+      "nombre": "clench"
+    },
+    "modo": "cursor",
+    "ejecutada": true,
+    "motivo": null
+  }
+}

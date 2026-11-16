@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "tipo": "error",
+  "seq": 11,
+  "t": 1763300000011,
+  "datos": {
+    "codigo": "CASCO_DESCONECTADO",
+    "mensaje": "El casco se desconectó",
+    "recuperable": true
+  }
+}

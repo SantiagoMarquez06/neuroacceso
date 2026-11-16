@@ -2,12 +2,21 @@
 
 Esta carpeta define **cómo se hablan** el motor (`backend/`, Santiago) y la interfaz (`frontend/`, Jonnathan). Es lo único que comparten: mientras ambos cumplan el contrato, cada uno puede trabajar sin esperar al otro.
 
-| Archivo | Estado |
+| Archivo | Qué es |
 |---|---|
-| [api-v1.md](api-v1.md) | **Borrador** de la API v1 (REST + eventos WebSocket). Se revisa y congela en la semana 1. |
-| `openapi.yaml` | *(F0)* Versión formal de la parte REST. |
-| `ws/*.schema.json` | *(F0)* JSON Schema de cada evento WebSocket. |
-| `ejemplos/*.json` | *(F0)* Ejemplos de respuestas y eventos. Alimentan los mocks de la interfaz y los tests del motor. |
+| [api-v1.md](api-v1.md) | Descripción en prosa de la API v1 (REST + eventos WebSocket). |
+| [openapi.json](openapi.json) | Especificación OpenAPI de la parte REST. **Generado.** |
+| [ws/](ws/) | JSON Schema del sobre y de cada evento WebSocket. **Generado.** |
+| [ejemplos/](ejemplos/) | Ejemplos de eventos (`ws/`) y respuestas (`rest/`) para los mocks de la interfaz. **Generado.** |
+
+Los archivos generados salen de los modelos del motor (`backend/src/neuroacceso_motor/contrato.py`), que son la única fuente de verdad:
+
+```bash
+cd backend
+uv run python -m neuroacceso_motor.exportar_contrato      # regenerar
+```
+
+Un test del motor falla si están desactualizados, así que el código y el contrato nunca divergen. **No edites los archivos generados a mano**: propón el cambio en `contrato.py` (o pídeselo al motor) por PR.
 
 ## Reglas
 1. Todo cambio entra por un **Pull Request propio** (`contrato/<cambio>`), aprobado por **los dos**, antes de implementarlo.
