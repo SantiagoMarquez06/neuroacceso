@@ -97,7 +97,7 @@ def modo_demo(mover_raton: bool) -> None:
             sys.exit("El simulador no arrancó. ¿Instalaste las dependencias de demo? "
                      "pip install -e .[demo]")
         App(f"ws://localhost:{PUERTO}", "demo", "demo", mover_raton=mover_raton,
-            etiqueta_fuente="MODO DEMO · casco simulado").ejecutar()
+            etiqueta_fuente="DEMO · flechas = cabeza · C = clic · Q = pausa").ejecutar()
     finally:
         sim.terminate()
         try:

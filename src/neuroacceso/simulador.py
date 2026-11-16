@@ -4,7 +4,8 @@ Levanta un servidor WebSocket que habla el mismo protocolo JSON-RPC que el servi
 Cortex del EMOTIV Launcher (requestAccess, authorize, queryHeadsets, createSession,
 subscribe…) y emite los streams fac, mot, dev y com de un "EPOC X simulado".
 
-Controles (globales, funcionan aunque la ventana no tenga el foco; F8 los activa/desactiva):
+Controles (funcionan cuando la ventana activa es NeuroAcceso o este simulador; F8 los
+activa/desactiva). Escribir en otros programas NO dispara gestos:
     Flechas  → girar la cabeza          C → apretar mandíbula (clench)
     Q        → guiño izquierdo (winkL)  E → guiño derecho (winkR)
     B        → parpadeo (blink)         S → sonrisa (smile)
@@ -262,8 +263,28 @@ class ServidorCortexSimulado:
 
 
 # ------------------------------------------------------------------------ panel
+VENTANAS_DEMO = ("NeuroAcceso", "Simulador EPOC X")
+
+
+def _ventana_demo_activa() -> bool:
+    """True si la ventana en primer plano es la app o el simulador.
+    Así, escribir en otros programas no dispara gestos ni clics."""
+    try:
+        import ctypes
+
+        u32 = ctypes.windll.user32
+        hwnd = u32.GetForegroundWindow()
+        n = u32.GetWindowTextLengthW(hwnd)
+        buf = ctypes.create_unicode_buffer(n + 1)
+        u32.GetWindowTextW(hwnd, buf, n + 1)
+        return buf.value.startswith(VENTANAS_DEMO)
+    except (AttributeError, OSError):  # fuera de Windows: no se filtra
+        return True
+
+
 def _teclado_global(estado: EstadoCasco, activo: list[bool]):
-    """Escucha el teclado aunque la ventana no tenga el foco (necesita pynput)."""
+    """Escucha el teclado mientras la ventana activa sea la app o el simulador
+    (necesita pynput). F8 activa/desactiva las teclas."""
     try:
         from pynput import keyboard
     except ImportError:
@@ -278,7 +299,7 @@ def _teclado_global(estado: EstadoCasco, activo: list[bool]):
             activo[0] = not activo[0]
             estado.direcciones.clear()
             return
-        if not activo[0] or k in pulsadas:
+        if not activo[0] or k in pulsadas or not _ventana_demo_activa():
             return
         pulsadas.add(k)
         if k in flechas:
@@ -311,8 +332,10 @@ def panel(estado: EstadoCasco, puerto: int) -> None:
     root = tk.Tk()
     root.title("Simulador EPOC X")
     root.configure(bg="#101418")
-    root.attributes("-topmost", True)
-    root.geometry("+20+40")
+    # Abajo a la derecha y SIN "siempre encima": no debe tapar la app. Las teclas funcionan
+    # igual con NeuroAcceso en primer plano.
+    root.update_idletasks()
+    root.geometry(f"+{root.winfo_screenwidth() - 470}+{root.winfo_screenheight() - 420}")
 
     fg, tenue, acento = "#e8eaed", "#9aa0a6", "#f0a020"
     tk.Label(root, text="Simulador EPOC X", font=("Segoe UI", 15, "bold"),
@@ -326,7 +349,8 @@ def panel(estado: EstadoCasco, puerto: int) -> None:
     ayuda = ("Flechas  girar cabeza      R  mirar al frente\n"
              "C  apretar mandíbula       Q / E  guiño izq. / der.\n"
              "B  parpadeo   S  sonrisa   P  comando mental push\n"
-             + ("F8  activar/desactivar teclado global" if global_ok
+             + ("Funcionan con NeuroAcceso o este panel en primer plano.\n"
+                "F8  activar/desactivar las teclas" if global_ok
                 else "(instala pynput para teclado global; ahora solo con esta ventana activa)"))
     tk.Label(root, text=ayuda, font=("Consolas", 9), bg="#101418", fg=tenue,
              justify="left").pack(padx=16, anchor="w")
@@ -358,7 +382,7 @@ def panel(estado: EstadoCasco, puerto: int) -> None:
             f"Clientes conectados: {estado.clientes}\n"
             f"Cabeza  yaw {estado.yaw:+6.1f}°  pitch {estado.pitch:+6.1f}°\n"
             f"Último gesto: {estado.ultimo_gesto}   Batería: {estado.bateria:.0f}%\n"
-            f"Teclado global: {'ACTIVO' if activo[0] and global_ok else 'inactivo'}"
+            f"Teclas: {'ACTIVAS' if activo[0] and global_ok else 'desactivadas (F8)'}"
         ))
         root.after(100, refrescar)
 

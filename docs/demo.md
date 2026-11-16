@@ -34,7 +34,7 @@ Se abren dos ventanas:
 
 ### Controles del simulador
 
-Funcionan aunque la ventana activa sea otra (teclado global, **F8** lo activa/desactiva):
+Funcionan cuando la ventana activa es **NeuroAcceso** o el **simulador** (así, escribir en otros programas no dispara clics). **F8** las activa/desactiva:
 
 | Tecla | Simula |
 |---|---|

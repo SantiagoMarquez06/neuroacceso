@@ -89,6 +89,9 @@ class App:
         self._tab_comunicador()
         self._tab_config()
         self.nb.bind("<<NotebookTabChanged>>", self._cambio_tab)
+        # Las flechas simulan/controlan la cabeza: que no cambien de pestaña ni muevan el foco.
+        for tecla in ("<Left>", "<Right>", "<Up>", "<Down>", "<Tab>"):
+            self.root.bind_all(tecla, lambda e: "break")
         self._actualizar_mouse()
 
         self.cortex: CortexClient | None = None
@@ -148,6 +151,10 @@ class App:
         self.lbl_conexion = tk.Label(der, text="● Conectando…", bg=C["panel"], fg=C["alerta"],
                                      font=("Segoe UI", 10, "bold"), padx=10, pady=4)
         self.lbl_conexion.pack(side="left", padx=6)
+        self.lbl_cursor_cab = tk.Label(der, text="🖱️ Calibrando…", bg=C["panel"],
+                                       fg=C["alerta"], font=("Segoe UI", 10, "bold"),
+                                       padx=10, pady=4)
+        self.lbl_cursor_cab.pack(side="left", padx=6)
         self.lbl_bateria = tk.Label(der, text="🔋 —", bg=C["panel"], fg=C["texto"],
                                     font=("Segoe UI", 10), padx=10, pady=4)
         self.lbl_bateria.pack(side="left", padx=6)
@@ -262,8 +269,9 @@ class App:
                                       font=("Segoe UI", 12, "bold"))
         self.btn_practica.pack(side="left")
         self.lbl_practica = self._lbl(barra, "Mueve el cursor con la cabeza y haz clic "
-                                      "apretando la mandíbula sobre cada círculo.", 11,
-                                      C["tenue"])
+                                      "apretando la mandíbula sobre cada círculo.\n"
+                                      "Demo: flechas = cabeza · C = mandíbula (clic)", 10,
+                                      C["tenue"], justify="left")
         self.lbl_practica.pack(side="left", padx=14)
         self.cv_practica = tk.Canvas(tab, bg="#101216", highlightthickness=0, cursor="crosshair")
         self.cv_practica.pack(fill="both", expand=True)
@@ -509,15 +517,17 @@ class App:
         self.cv_orient.coords(self.punto_orient, x - 6, y - 6, x + 6, y + 6)
         self.lbl_orient.config(text=f"yaw {dyaw:+.1f}°  pitch {dpitch:+.1f}°")
         if not calibrado:
-            self.lbl_cursor.config(text="Calibrando…", fg=C["alerta"])
+            texto, color = "Calibrando…", C["alerta"]
         elif self.tab == TAB_COMUNICADOR:
-            self.lbl_cursor.config(text="Bloqueado", fg=C["tenue"])
+            texto, color = "Bloqueado", C["tenue"]
         elif self.pausado:
-            self.lbl_cursor.config(text="En pausa", fg=C["alerta"])
+            texto, color = "En pausa (guiño izq.)", C["alerta"]
         elif not self.var_mover.get():
-            self.lbl_cursor.config(text="Solo visual", fg=C["tenue"])
+            texto, color = "Solo visual", C["tenue"]
         else:
-            self.lbl_cursor.config(text="Activo", fg=C["ok"])
+            texto, color = "Activo", C["ok"]
+        self.lbl_cursor.config(text=texto, fg=color)
+        self.lbl_cursor_cab.config(text=f"🖱️ Cursor: {texto}", fg=color)
 
     def _ui_gesto(self, gesto: str) -> None:
         self.lbl_gesto.config(text=NOMBRE_GESTO.get(gesto, gesto))
@@ -535,6 +545,8 @@ class App:
 
     # ================================================================ ciclo
     def ejecutar(self) -> None:
+        # Traer la ventana al frente y darle el foco al abrir.
+        self.root.after(300, lambda: (self.root.lift(), self.root.focus_force()))
         self.root.mainloop()
 
     def cerrar(self) -> None:

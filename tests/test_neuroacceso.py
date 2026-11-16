@@ -141,3 +141,10 @@ def _intentar(f) -> bool:
         return True
     except Exception:
         return False
+
+
+def test_todos_los_modulos_importan():
+    import importlib
+
+    for m in ("app", "comunicador", "head_mouse", "simulador", "__main__"):
+        importlib.import_module(f"neuroacceso.{m}")
