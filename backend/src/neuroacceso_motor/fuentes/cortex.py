@@ -170,7 +170,7 @@ class CortexFuente:
         self.sesion = (sesion or {}).get("id") or await self._buscar_sesion()
         await self._llamar("subscribe", {"cortexToken": self.token, "session": self.sesion,
                                                "streams": STREAMS})
-        if "mot" not in self._cols and "fac" not in self._cols:
+        if "mot" not in self._cols:  # sin movimiento no hay calibración ni cursor
             raise FuenteError("SIN_CASCO", "No se pudo suscribir a los datos del casco")
         return self.casco
 
@@ -209,6 +209,14 @@ class CortexFuente:
             yield m
 
     async def cargar_perfil(self, nombre: str) -> None:
+        actual = await self._llamar("getCurrentProfile", {"cortexToken": self.token,
+                                                          "headset": self.casco})
+        cargado = (actual or {}).get("name")
+        if cargado == nombre:
+            return
+        if cargado:  # Cortex exige descargar el perfil anterior antes de cargar otro
+            await self._llamar("setupProfile", {"cortexToken": self.token, "headset": self.casco,
+                                                "profile": cargado, "status": "unload"})
         perfiles = await self._llamar("queryProfile", {"cortexToken": self.token})
         existe = any(p.get("name") == nombre for p in perfiles or [])
         await self._llamar("setupProfile", {"cortexToken": self.token, "headset": self.casco,

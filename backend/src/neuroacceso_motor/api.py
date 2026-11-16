@@ -37,6 +37,7 @@ from .contrato import (
     SimularGesto,
 )
 from .eventos import sobre
+from .fuentes.base import FuenteError
 from .fuentes.simulador import GESTOS, Simulador
 from .motor import ModoInvalido, Motor
 from .seguridad import autorizar_ws
@@ -61,6 +62,10 @@ def registrar(app: FastAPI, motor: Motor, voz: Voz, simulador: Simulador | None)
     @app.exception_handler(ErrorAPI)
     async def _error(_: Request, e: ErrorAPI) -> JSONResponse:
         return JSONResponse({"codigo": e.codigo, "mensaje": e.mensaje}, status_code=e.status)
+
+    @app.exception_handler(FuenteError)
+    async def _fuente(_: Request, e: FuenteError) -> JSONResponse:
+        return JSONResponse({"codigo": e.codigo, "mensaje": e.mensaje}, status_code=502)
 
     @app.exception_handler(ModoInvalido)
     async def _modo(_: Request, e: ModoInvalido) -> JSONResponse:

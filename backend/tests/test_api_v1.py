@@ -170,3 +170,40 @@ def test_interfaz_sin_build_y_spa(tmp_path):
     assert con.get("/barra").text == "<html>APP</html>"   # ruta de la SPA
     assert con.get("/logo.svg").text == "<svg/>"
     assert con.get("/..%2F..%2Fsecreto").text == "<html>APP</html>"  # sin path traversal
+
+
+def test_interfaz_nunca_abre_rutas_de_red(tmp_path, monkeypatch):
+    """Una ruta UNC haría que Windows envíe credenciales NTLM aunque luego se rechace."""
+    import pathlib
+
+    (tmp_path / "index.html").write_text("<html>APP</html>")
+    abiertas: list[str] = []
+    original = pathlib.Path.resolve
+
+    def espia(self, *a, **k):
+        abiertas.append(str(self))
+        return original(self, *a, **k)
+
+    monkeypatch.setattr(pathlib.Path, "resolve", espia)
+    cli = TestClient(crear_app(Config(token=TOKEN, autoconectar=False, frontend=tmp_path)),
+                     base_url="http://127.0.0.1")
+    for ruta in ["///evil.com/share/x", "/%5C%5Cevil.com%5Cshare%5Cx", "/C:/Windows/win.ini",
+                 "/..%2F..%2Fsecreto"]:
+        assert cli.get(ruta).text == "<html>APP</html>"
+    raiz = str(tmp_path.resolve())
+    assert all(a.startswith(raiz) and not a.startswith("\\\\") for a in abiertas), abiertas
+
+
+def test_entrenamiento_rechazado_por_cortex_no_atasca(c):
+    from neuroacceso_motor.fuentes.base import FuenteError
+
+    assert esperar(lambda: c.get("/api/v1/estado").json()["modo"] == "cursor")
+    sim = c.app_.state.simulador
+
+    async def falla(*_a):
+        raise FuenteError("TOKEN_CORTEX_EXPIRADO", "sin perfil cargado")
+
+    sim.entrenar = falla
+    r = c.post("/api/v1/entrenamiento", json={"deteccion": "mental", "accion": "push"})
+    assert r.status_code == 502 and r.json()["codigo"] == "TOKEN_CORTEX_EXPIRADO"
+    assert c.get("/api/v1/estado").json()["modo"] == "cursor"

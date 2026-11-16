@@ -5,7 +5,7 @@ import secrets
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -125,7 +125,12 @@ def _servir_interfaz(app: FastAPI, carpeta: Path | None) -> None:
             return JSONResponse({"codigo": "VALIDACION", "mensaje": "Ruta no encontrada"}, 404)
         if raiz is None:
             return HTMLResponse(PAGINA_SIN_INTERFAZ)
-        archivo = (raiz / ruta).resolve()
-        if ruta and archivo.is_file() and archivo.is_relative_to(raiz):  # sin path traversal
-            return FileResponse(archivo)
+        # Se valida ANTES de tocar el disco: en Windows, abrir una ruta UNC (\servidor) envía las
+        # credenciales NTLM a ese servidor aunque luego se rechace la ruta.
+        partes = PurePosixPath(ruta)
+        if (ruta and "\\" not in ruta and ":" not in ruta and not partes.is_absolute()
+                and ".." not in partes.parts and not ruta.startswith("/")):
+            archivo = (raiz / ruta).resolve()
+            if archivo.is_relative_to(raiz) and archivo.is_file():
+                return FileResponse(archivo)
         return FileResponse(raiz / "index.html")

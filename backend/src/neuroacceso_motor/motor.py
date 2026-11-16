@@ -274,13 +274,19 @@ class Motor:
                                      motivo=motivo))  # type: ignore[arg-type]
 
     def cambiar_modo(self, modo: Modo, motivo: str = "usuario") -> None:
+        if self.estado.modo == "entrenando" and modo in MODOS_USUARIO:
+            self._cancelar_entreno()  # pedir otro modo cancela el entrenamiento en curso
         if modo not in MODOS_USUARIO or self.estado.modo not in MODOS_USUARIO:
             raise ModoInvalido(f"No se puede pasar de {self.estado.modo} a {modo}")
         self._fijar_modo(modo, motivo)
 
     def interfaz_desconectada(self) -> None:
         """Si se cierra la última interfaz en el comunicador, el usuario no queda atrapado."""
-        if self.hub.n_clientes == 0 and self.estado.modo == "comunicador":
+        if self.hub.n_clientes > 0:
+            return
+        if self.estado.modo == "entrenando":
+            self._cancelar_entreno()
+        if self.estado.modo == "comunicador":
             self._fijar_modo("cursor", "ui_desconectada")
 
     # =========================================================== calibración
@@ -358,8 +364,25 @@ class Motor:
         self._entreno = EvEntrenamiento(fase="iniciado", deteccion=deteccion,  # type: ignore[arg-type]
                                         accion=accion)
         self._fijar_modo("entrenando", "entrenamiento")
-        await self.fuente.entrenar(self._deteccion_cortex(), accion, "start")
+        try:
+            await self.fuente.entrenar(self._deteccion_cortex(), accion, "start")
+        except Exception:
+            self._terminar_entreno()
+            raise
         return uuid.uuid4().hex[:12]
+
+    def _terminar_entreno(self) -> None:
+        self._entreno = None
+        if self.estado.modo == "entrenando":
+            self._fijar_modo(self._modo_previo, "entrenamiento")
+
+    def _cancelar_entreno(self) -> None:
+        """Salida de emergencia: avisa a Cortex sin esperar y vuelve al modo previo."""
+        if self._entreno is not None and self.fuente is not None:
+            tarea = asyncio.ensure_future(self.fuente.entrenar(
+                self._deteccion_cortex(), self._entreno.accion, "reject"))
+            tarea.add_done_callback(lambda t: t.cancelled() or t.exception())
+        self._terminar_entreno()
 
     async def responder_entrenamiento(self, aceptar: bool) -> None:
         if self.fuente is None or self._entreno is None:
@@ -378,5 +401,4 @@ class Motor:
         self._entreno = self._entreno.model_copy(update={"fase": fase})
         self.publicar("entrenamiento", self._entreno)
         if fase in ("guardado", "fallo", "rechazado"):
-            self._entreno = None
-            self._fijar_modo(self._modo_previo, "entrenamiento")
+            self._terminar_entreno()

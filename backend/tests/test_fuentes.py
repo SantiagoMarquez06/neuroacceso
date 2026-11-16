@@ -111,8 +111,8 @@ def test_convertir_streams_de_cortex():
 class CortexFalso:
     """Servidor mínimo que habla el JSON-RPC de Cortex."""
 
-    def __init__(self, acceso=True, cascos=True):
-        self.acceso, self.cascos = acceso, cascos
+    def __init__(self, acceso=True, cascos=True, perfil_cargado=None):
+        self.acceso, self.cascos, self.perfil_cargado = acceso, cascos, perfil_cargado
         self.llamadas: list[str] = []
 
     async def __call__(self, ws):
@@ -120,14 +120,16 @@ class CortexFalso:
         async for raw in ws:
             msg = json.loads(raw)
             metodo = msg["method"]
-            self.llamadas.append(metodo)
+            self.llamadas.append(metodo if metodo != "setupProfile"
+                                 else f"setupProfile:{msg['params']['status']}")
             r = {
                 "requestAccess": {"accessGranted": self.acceso},
                 "authorize": {"cortexToken": "tok"},
                 "queryHeadsets": [{"id": "EPOCX-1", "status": "connected"}] if self.cascos else [],
                 "controlDevice": {},
                 "createSession": {"id": "ses-1"},
-                "queryProfile": [],
+                "queryProfile": [{"name": "Ana"}],
+                "getCurrentProfile": {"name": self.perfil_cargado},
                 "setupProfile": {},
                 "training": {},
                 "subscribe": {"success": [
@@ -197,3 +199,28 @@ def test_cortex_sin_credenciales():
     with pytest.raises(FuenteError) as e:
         CortexFuente("", "")
     assert e.value.codigo == "APP_NO_APROBADA"
+
+
+async def test_cortex_cambiar_de_perfil_descarga_el_anterior():
+    srv = CortexFalso(perfil_cargado="Pedro")
+
+    async def prueba(f):
+        await f.abrir()
+        await f.cargar_perfil("Ana")
+        await f.cerrar()
+
+    await con_cortex(srv, prueba)
+    i = srv.llamadas.index("getCurrentProfile")
+    assert srv.llamadas[i + 1:i + 4] == ["setupProfile:unload", "queryProfile", "setupProfile:load"]
+
+
+async def test_cortex_mismo_perfil_no_recarga():
+    srv = CortexFalso(perfil_cargado="Ana")
+
+    async def prueba(f):
+        await f.abrir()
+        await f.cargar_perfil("Ana")
+        await f.cerrar()
+
+    await con_cortex(srv, prueba)
+    assert not [x for x in srv.llamadas if x.startswith("setupProfile")]

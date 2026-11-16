@@ -203,3 +203,21 @@ def test_muestras_mentales_intercaladas_no_repiten_el_gesto(banco):
         banco.motor.procesar(Mental(t=0, accion="neutral", potencia=0))
     assert len(banco.eventos("gesto")) == 1
     assert [o[0] for o in banco.raton.ordenes if o[0] != "mover"] == ["clic"]
+
+
+async def test_pedir_otro_modo_cancela_el_entrenamiento(banco):
+    banco.conectar_y_calibrar()
+    await banco.motor.entrenar("mental", "push")
+    banco.motor.cambiar_modo("comunicador")
+    await asyncio.sleep(0)
+    assert banco.motor.estado.modo == "comunicador"
+    assert ("mentalCommand", "push", "reject") in banco.fuente.entrenos
+
+
+async def test_cerrar_la_interfaz_cancela_el_entrenamiento(banco):
+    banco.conectar_y_calibrar()
+    await banco.motor.entrenar("mental", "push")
+    banco.hub.quitar(banco._cola)
+    banco.motor.interfaz_desconectada()
+    await asyncio.sleep(0)
+    assert banco.motor.estado.modo == "cursor"
