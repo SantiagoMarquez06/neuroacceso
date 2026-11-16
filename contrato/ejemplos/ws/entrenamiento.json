@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "tipo": "entrenamiento",
+  "seq": 12,
+  "t": 1763300000012,
+  "datos": {
+    "fase": "exito",
+    "deteccion": "mental",
+    "accion": "push"
+  }
+}

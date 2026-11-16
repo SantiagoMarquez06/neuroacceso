@@ -27,7 +27,7 @@ flowchart TB
             PR["Procesamiento<br/>calibración · cursor · gestos · mental · dwell"]
             MO["Máquina de modos<br/>cursor · comunicador · pausa · calibrando · entrenando"]
             AC["Actuadores (hilo propio)<br/>ratón · teclado · (futuro: domótica)"]
-            DB[("SQLite<br/>SQLAlchemy + Alembic")]
+            DB[("SQLite<br/>perfiles · sesiones")]
             API["API v1<br/>REST + WebSocket · 127.0.0.1 · token"]
             FU --> PR --> MO --> AC
             MO <--> DB
@@ -47,27 +47,39 @@ flowchart TB
 
 ## 3. Motor (`backend/`) — Parte A
 
-### 3.1 Estructura propuesta
+### 3.1 Estructura (implementada)
 ```
 backend/
-├── pyproject.toml
+├── pyproject.toml           ← dependencias (uv); grupo "escritorio": pywebview + PyInstaller
 ├── src/neuroacceso_motor/
-│   ├── main.py              ← arranque: FastAPI + pywebview + token
-│   ├── config.py            ← ajustes del servicio (puerto, rutas, modo demo)
-│   ├── fuentes/             ← base.py (Fuente), cortex.py, simulador.py, replay.py, grabador.py
-│   ├── procesamiento/       ← calibracion.py, cursor.py, gestos.py, mental.py, dwell.py
-│   ├── modos.py             ← máquina de estados + gesto de rescate
-│   ├── actuadores/          ← base.py (Actuador), raton.py, teclado.py
-│   ├── dominio/             ← modelos y lógica (perfiles, ajustes, sesiones, métricas Fitts)
-│   ├── persistencia/        ← SQLAlchemy, repositorios, migraciones Alembic
-│   ├── api/                 ← rest/*.py, ws.py (hub de eventos), seguridad.py
-│   └── escritorio/          ← ventana principal y barra flotante (pywebview)
+│   ├── __main__.py          ← CLI: --demo, --replay, --grabar, --escritorio, --dev…
+│   ├── main.py              ← crea la app FastAPI, arma las piezas y su ciclo de vida
+│   ├── contrato.py          ← modelos Pydantic de la API v1 (fuente única del contrato)
+│   ├── exportar_contrato.py ← genera contrato/openapi.json, ws/*.schema.json, ejemplos/
+│   ├── seguridad.py         ← token, Host, Origin
+│   ├── api.py               ← REST + WebSocket /eventos + /dev/simular (demo)
+│   ├── motor.py             ← conexión con reintentos, máquina de modos, calibración, acciones
+│   ├── procesamiento.py     ← cursor por la cabeza, detección de gestos, clic por permanencia
+│   ├── actuadores.py        ← ratón del SO en un hilo propio + medición de latencia
+│   ├── eventos.py           ← hub de eventos hacia los clientes WebSocket
+│   ├── datos.py             ← SQLite (stdlib) con migraciones por versión
+│   ├── metricas.py          ← Fitts ISO 9241-411, precisión, falsos positivos, caracteres/min
+│   ├── voz.py · atajos.py   ← voz de respaldo y atajos de emergencia
+│   ├── escritorio.py        ← ventana principal + barra flotante (pywebview)
+│   └── fuentes/             ← base.py (protocolo), cortex.py, simulador.py, replay.py (+ grabador)
+├── scripts/                 ← cliente_ws.py (ver eventos), empaquetar.ps1 (ejecutable)
 ├── grabaciones/             ← sesiones reales del casco (JSONL) para Replay y tests
-└── tests/                   ← unitarios, contrato, replay, latencia
+└── tests/                   ← unitarios, fuentes (con Cortex falso), motor, API, métricas, latencia
 ```
 
+**Decisiones de implementación** (principio: el cambio completo más pequeño):
+- **Contrato generado del código:** los modelos de `contrato.py` son la única fuente; un test falla si `contrato/` está desactualizado.
+- **SQLite con la biblioteca estándar** (`sqlite3`) y migraciones por `PRAGMA user_version`, en lugar de SQLAlchemy + Alembic: el modelo tiene 5 tablas y un solo proceso. Si crece, se migra a SQLAlchemy.
+- **Credenciales de Emotiv** desde variables de entorno o `.env`; nunca salen por la API.
+- **Token en el fragmento de la URL** (`#token=…`) en lugar de inyectarlo en la página: el fragmento no se envía al servidor ni queda en logs.
+
 ### 3.2 Flujo de una muestra
-1. La **Fuente** entrega muestras normalizadas (`MuestraMovimiento`, `MuestraFacial`, `MuestraDispositivo`, `MuestraMental`), con la hora original de Cortex.
+1. La **Fuente** entrega muestras normalizadas (`Movimiento`, `Facial`, `Dispositivo`, `Mental`, `Sistema`), con la hora original de Cortex y la hora local de recepción (para medir la latencia).
 2. **Procesamiento** las convierte en señales (`Orientacion`, `Gesto`, `Permanencia`) según los **ajustes del perfil activo**.
 3. La **máquina de modos** decide qué significa cada señal **en el modo actual**:
    - en `cursor`: mover el ratón o hacer clic → **Actuador**;
@@ -102,10 +114,11 @@ Reglas:
 
 ### 3.5 Seguridad
 Escuchar en `127.0.0.1` **no basta**: cualquier página web abierta en el navegador puede conectarse a un WebSocket local (los WebSocket no aplican CORS) y mover el ratón.
-1. **Token aleatorio por arranque**, obligatorio en REST (`Authorization: Bearer`) y WebSocket (`?token=`). pywebview lo inyecta en la ventana.
+1. **Token aleatorio por arranque**, obligatorio en REST (`Authorization: Bearer`) y WebSocket (`?token=`). La ventana lo recibe en el fragmento de la URL (`#token=…`).
 2. Validación de **`Origin`** (WebSocket) y **`Host`** (todas las peticiones) contra una lista blanca.
 3. CORS cerrado; en desarrollo solo se permite el origen del servidor de Vite.
-4. El **Client Secret** de Cortex nunca sale por la API; se guarda con `keyring` (Administrador de credenciales de Windows).
+4. El **Client Secret** de Cortex nunca sale por la API; se lee de variables de entorno o `.env` local.
+6. La documentación interactiva (`/docs`) solo existe con `--dev`.
 5. Los endpoints `/dev/*` solo existen en modo `--demo`.
 
 ### 3.6 Datos

@@ -1,0 +1,34 @@
+{
+  "properties": {
+    "fase": {
+      "enum": [
+        "iniciado",
+        "exito",
+        "fallo",
+        "guardado",
+        "rechazado"
+      ],
+      "title": "Fase",
+      "type": "string"
+    },
+    "deteccion": {
+      "enum": [
+        "mental",
+        "facial"
+      ],
+      "title": "Deteccion",
+      "type": "string"
+    },
+    "accion": {
+      "title": "Accion",
+      "type": "string"
+    }
+  },
+  "required": [
+    "fase",
+    "deteccion",
+    "accion"
+  ],
+  "title": "EvEntrenamiento",
+  "type": "object"
+}
