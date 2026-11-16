@@ -1,4 +1,6 @@
-# Plan de trabajo
+# Plan de trabajo (prototipo)
+
+> ⚠️ **Este plan corresponde al prototipo y quedó reemplazado.** El plan vigente del sistema real, con la división entre Santiago (motor) y Jonnathan (interfaz), está en **[division-del-trabajo.md](division-del-trabajo.md)**.
 
 Duración total estimada: **9–12 semanas**. Cada fase termina con una demostración funcional.
 

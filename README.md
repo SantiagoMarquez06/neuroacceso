@@ -4,6 +4,11 @@
 
 Propuesta de proyecto de software · Universidad Católica de Cuenca · 2026
 
+> **Estado (noviembre 2026): de prototipo a sistema real.** Lo que hay hoy en `src/` es el **prototipo** (Python + tkinter, con demo sin casco). El sistema definitivo se construye en paralelo en dos partes — **motor** (Santiago) e **interfaz** (Jonnathan) — unidas por un contrato:
+> - 📋 [División del trabajo](docs/division-del-trabajo.md)
+> - 🏗️ [Arquitectura del sistema](docs/arquitectura-sistema.md)
+> - 🤝 [Contrato API v1 (borrador)](contrato/api-v1.md)
+
 ---
 
 ## 1. El problema
@@ -139,18 +144,20 @@ pip install -e ".[dev]"
 python -m pytest -q
 ```
 
-## 8. Plan de trabajo (resumen)
+## 8. Plan de trabajo
 
-| Fase | Entregable | Duración estimada |
-|---|---|---|
-| 0. Preparación | Cuenta Emotiv, Client ID, prueba de conexión OK | 1 semana |
-| 1. Cursor con la cabeza | Mover el ratón con el giro de la cabeza, calibración | 2 semanas |
-| 2. Gestos → clics | Clics por mandíbula/guiños con anti-rebote | 1–2 semanas |
-| 3. Comunicador | Teclado con barrido, frases rápidas, voz | 2–3 semanas |
-| 4. Comando mental (opcional) | Entrenar "empujar" y usarlo como acción | 1–2 semanas |
-| 5. Pruebas y presentación | Pruebas con usuarios, métricas, informe y demo | 2 semanas |
+El sistema real se construye en **12 semanas** (desde el 16 de noviembre de 2026), en dos partes independientes:
 
-Detalle con tareas y roles: [docs/plan-de-trabajo.md](docs/plan-de-trabajo.md).
+| Fase | Semanas | Motor — Santiago | Interfaz — Jonnathan |
+|---|---|---|---|
+| F0 | 1 | Monorepo, CI, FastAPI con seguridad local | Proyecto React + TS, design tokens, cliente WS |
+| F1 | 2–4 | Fuentes (Cortex, simulador, replay), cursor, gestos, WebSocket | Estructura de la app, pantalla Estado, mocks |
+| F2 | 5–7 | Base de datos, perfiles, máquina de modos, ejecutable | Onboarding, ajustes, perfiles, comunicador con voz |
+| F3 | 8–9 | Entrenamiento Cortex, comando mental, métricas Fitts | Entrenamiento, práctica de puntería, predicción de palabras |
+| F4 | 10–11 | Robustez, latencia, instalador | Informes, auditoría de accesibilidad |
+| F5 | 12 | Protocolo de pruebas, CSV | Video demo, SUS |
+
+Detalle, reglas de trabajo y puntos de integración: **[docs/division-del-trabajo.md](docs/division-del-trabajo.md)**. Las tareas están como *issues* en GitHub con milestones F0–F5.
 
 ## 9. Cómo se medirá el éxito
 
