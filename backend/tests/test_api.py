@@ -93,3 +93,12 @@ def test_ejemplos_validan_contra_su_modelo():
 
 def test_contrato_exportado_al_dia():
     assert desactualizados() == [], "ejecuta: uv run python -m neuroacceso_motor.exportar_contrato"
+
+
+def test_docs_solo_en_dev(cliente):
+    assert cliente.get("/docs").status_code == 404
+    assert cliente.get("/openapi.json").status_code == 404
+
+
+def test_options_sin_dev_exige_token(cliente):
+    assert cliente.options("/api/v1/salud").status_code == 401

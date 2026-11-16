@@ -42,18 +42,20 @@ def token_de_cabecera(valor: str | None) -> str | None:
 class Guardia(BaseHTTPMiddleware):
     """Valida Host, Origin y token en toda petición HTTP bajo /api/."""
 
-    def __init__(self, app, token: str, origenes: set[str]):  # type: ignore[no-untyped-def]
+    def __init__(self, app, token: str, origenes: set[str], dev: bool = False):  # type: ignore[no-untyped-def]
         super().__init__(app)
         self.token = token
         self.origenes = origenes
+        self.dev = dev
 
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         if not host_valido(request.headers.get("host")):
             return _error(400, "ORIGEN_NO_PERMITIDO", "Host no permitido")
         if not origen_valido(request.headers.get("origin"), self.origenes):
             return _error(403, "ORIGEN_NO_PERMITIDO", "Origen no permitido")
-        # Las preflight CORS no llevan token; el middleware de CORS las responde.
-        if request.url.path.startswith("/api/") and request.method != "OPTIONS":
+        # Las preflight CORS no llevan token; solo existen en dev, donde las responde CORS.
+        preflight = self.dev and request.method == "OPTIONS"
+        if request.url.path.startswith("/api/") and not preflight:
             if not token_valido(token_de_cabecera(request.headers.get("authorization")),
                                 self.token):
                 return _error(401, "NO_AUTORIZADO", "Token ausente o inválido")

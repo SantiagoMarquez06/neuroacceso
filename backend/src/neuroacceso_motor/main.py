@@ -29,12 +29,15 @@ class Config:
 
 def crear_app(config: Config | None = None) -> FastAPI:
     config = config or Config()
+    docs = config.dev  # la documentación interactiva solo en desarrollo
     app = FastAPI(title="NeuroAcceso — motor", version=__version__,
-                  responses={401: {"model": Error}, 403: {"model": Error}})
+                  responses={401: {"model": Error}, 403: {"model": Error}},
+                  docs_url="/docs" if docs else None, redoc_url=None,
+                  openapi_url="/openapi.json" if docs else None)
     app.state.config = config
 
     # Orden: Starlette ejecuta primero el último añadido → CORS responde las preflight.
-    app.add_middleware(Guardia, token=config.token, origenes=config.origenes)
+    app.add_middleware(Guardia, token=config.token, origenes=config.origenes, dev=config.dev)
     if config.dev:
         app.add_middleware(CORSMiddleware, allow_origins=sorted(ORIGENES_DEV),
                            allow_methods=["*"], allow_headers=["*"])
