@@ -1,0 +1,37 @@
+name: Publicar ejecutable
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Pruebas
+        working-directory: backend
+        run: |
+          uv sync
+          uv run pytest -q
+      - name: Interfaz (si existe)
+        if: hashFiles('frontend/package.json') != ''
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+      - name: Empaquetar
+        working-directory: backend
+        shell: pwsh
+        run: ./scripts/empaquetar.ps1
+      - name: Comprimir
+        shell: pwsh
+        run: Compress-Archive -Path backend/dist/NeuroAcceso -DestinationPath NeuroAcceso-windows.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NeuroAcceso-windows
+          path: NeuroAcceso-windows.zip

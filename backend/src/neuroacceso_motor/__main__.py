@@ -8,6 +8,7 @@
 
 import argparse
 import os
+import sys
 from pathlib import Path
 
 import uvicorn
@@ -19,7 +20,8 @@ RAIZ = Path(__file__).resolve().parents[3]  # raíz del repositorio en desarroll
 
 def _cargar_env() -> None:
     """Lee EMOTIV_* de un .env (cwd o raíz del repo) sin pisar variables ya definidas."""
-    for ruta in (Path.cwd() / ".env", RAIZ / ".env"):
+    # cwd, junto al ejecutable (versión empaquetada) y raíz del repo (desarrollo)
+    for ruta in (Path.cwd() / ".env", Path(sys.executable).parent / ".env", RAIZ / ".env"):
         if ruta.is_file():
             for linea in ruta.read_text(encoding="utf-8").splitlines():
                 clave, sep, valor = linea.partition("=")
