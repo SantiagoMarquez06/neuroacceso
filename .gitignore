@@ -7,3 +7,10 @@ __pycache__/
 .vscode/
 .idea/
 *.egg-info/
+
+# backend
+backend/.venv/
+legacy/.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/

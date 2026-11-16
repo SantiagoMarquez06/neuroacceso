@@ -166,7 +166,7 @@ Ver [contrato/api-v1.md](../contrato/api-v1.md). Resumen:
 - **PyInstaller `--onedir`** (no `--onefile`, que provoca falsos positivos del antivirus). Primer ejecutable en la semana 6; sin firma de código (SmartScreen avisará: documentado).
 
 ## 7. Qué se reutiliza del prototipo
-| Prototipo (`src/neuroacceso/`) | Destino |
+| Prototipo (`legacy/src/neuroacceso/`) | Destino |
 |---|---|
 | `cortex_client.py` | Base de `fuentes/cortex.py` (pasar a asyncio, añadir perfiles y entrenamiento) |
 | `head_mouse.py` | `procesamiento/cursor.py` (leer de `Ajustes` del perfil, no de `config` global) |

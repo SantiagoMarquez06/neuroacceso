@@ -4,7 +4,7 @@
 
 Propuesta de proyecto de software · Universidad Católica de Cuenca · 2026
 
-> **Estado (noviembre 2026): de prototipo a sistema real.** Lo que hay hoy en `src/` es el **prototipo** (Python + tkinter, con demo sin casco). El sistema definitivo se construye en paralelo en dos partes — **motor** (Santiago) e **interfaz** (Jonnathan) — unidas por un contrato:
+> **Estado (noviembre 2026): de prototipo a sistema real.** El **prototipo** está en `legacy/` (Python + tkinter, con demo sin casco). El sistema definitivo se construye en paralelo en dos partes — **motor** (Santiago) e **interfaz** (Jonnathan) — unidas por un contrato:
 > - 📋 [División del trabajo](docs/division-del-trabajo.md)
 > - 🏗️ [Arquitectura del sistema](docs/arquitectura-sistema.md)
 > - 🖥️ [Especificación de pantallas](docs/pantallas.md)
@@ -35,6 +35,7 @@ Las personas con movilidad reducida severa (lesión medular, ELA, parálisis cer
 ### 🎬 Demo sin casco
 
 ```bash
+cd legacy
 pip install -e ".[demo]"
 python -m neuroacceso --demo
 ```
@@ -90,59 +91,31 @@ Detalle completo en [docs/arquitectura.md](docs/arquitectura.md) y [docs/cortex-
 
 ```
 neuroacceso/
-├── README.md                  ← esta propuesta
-├── pyproject.toml             ← paquete y dependencias (extras: demo, dev)
-├── requirements.txt           ← dependencias de Python
-├── .env.example               ← plantilla de credenciales de Emotiv
-├── docs/
-│   ├── demo.md                ← demo sin casco + guion de presentación
-│   ├── img/                   ← capturas de pantalla
-│   ├── guia-inicio.md         ← paso a paso para dejar todo funcionando
-│   ├── arquitectura.md        ← diseño del sistema y módulos
-│   ├── cortex-api.md          ← resumen técnico de la API de Emotiv
-│   ├── plan-de-trabajo.md     ← fases, tareas, roles y cronograma
-│   └── riesgos.md             ← riesgos y cómo mitigarlos
-├── scripts/
-│   └── probar_conexion.py     ← prueba inicial: muestra los datos del casco
-└── src/neuroacceso/
-    ├── config.py              ← ajustes (sensibilidad, gestos, tiempos)
-    ├── cortex_client.py       ← cliente de la API Cortex
-    ├── head_mouse.py          ← cursor controlado con la cabeza
-    ├── gestos.py              ← traduce expresiones faciales a acciones
-    ├── comunicador.py         ← teclado con barrido + voz
-    ├── app.py                 ← interfaz principal (4 pantallas)
-    ├── simulador.py           ← Cortex simulado para demos y desarrollo sin casco
-    └── __main__.py            ← punto de entrada
-tests/
-└── test_neuroacceso.py        ← pruebas unitarias y de punta a punta con el simulador
+├── backend/        ← MOTOR (Santiago): servicio Python + FastAPI — en construcción
+├── frontend/       ← INTERFAZ (Jonnathan): React + TypeScript — en construcción
+├── contrato/       ← API v1 que une motor e interfaz
+├── legacy/         ← prototipo funcional (tkinter) con demo sin casco
+├── docs/           ← arquitectura, pantallas, división del trabajo, guías
+└── .github/        ← integración continua y CODEOWNERS
 ```
 
 ## 7. Inicio rápido
 
 > Guía detallada (cuenta de Emotiv, Client ID, colocación del casco): **[docs/guia-inicio.md](docs/guia-inicio.md)**
 
+**Motor (backend)** — requiere [uv](https://docs.astral.sh/uv/):
 ```bash
-git clone https://github.com/SantiagoMarquez06/neuroacceso.git
-cd neuroacceso
-python -m venv .venv
-.venv\Scripts\activate          # Windows  (macOS/Linux: source .venv/bin/activate)
-pip install -e .                # instala dependencias y el paquete neuroacceso
-copy .env.example .env          # y poner el Client ID / Secret de Emotiv
+cd backend
+uv sync
+uv run pytest -q
+uv run python -m neuroacceso_motor
+```
 
-# 1) Probar que llegan datos del casco
-python scripts/probar_conexion.py
-
-# 2) Aplicación completa (estado, puntería, comunicador, configuración)
-python -m neuroacceso
-
-# Otras formas de ejecutarlo
-python -m neuroacceso --demo                      # sin casco (simulador)
-python -m neuroacceso --modo cursor               # solo cursor, sin interfaz
-python -m neuroacceso --modo comunicador --simular  # comunicador con la barra espaciadora
-
-# Pruebas automáticas
-pip install -e ".[dev]"
-python -m pytest -q
+**Prototipo (legacy)** — ver [legacy/README.md](legacy/README.md):
+```bash
+cd legacy
+pip install -e ".[demo,dev]"
+python -m neuroacceso --demo
 ```
 
 ## 8. Plan de trabajo

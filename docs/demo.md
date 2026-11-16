@@ -21,7 +21,7 @@ El simulador **imita el servicio Cortex del EMOTIV Launcher**: responde a `reque
 ## Arrancar
 
 ```bash
-pip install -e ".[demo]"
+cd legacy && pip install -e ".[demo]"
 python -m neuroacceso --demo
 ```
 

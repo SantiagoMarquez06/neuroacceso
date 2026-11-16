@@ -19,7 +19,7 @@ Duración total estimada: **9–12 semanas**. Cada fase termina con una demostra
 - [ ] Crear EmotivID, instalar EMOTIV Launcher y EmotivBCI.
 - [ ] Registrar la Cortex App y obtener Client ID / Secret.
 - [ ] Aprender a colocar el casco y obtener contacto verde en todos los sensores.
-- [ ] Ejecutar `scripts/probar_conexion.py` y ver `fac`, `mot` y `dev` en consola.
+- [ ] Ejecutar `legacy/scripts/probar_conexion.py` y ver `fac`, `mot` y `dev` en consola.
 - [ ] Ejecutar `getDetectionInfo` para confirmar la lista de gestos del casco.
 - **Entregable:** captura/video de los datos llegando al programa.
 

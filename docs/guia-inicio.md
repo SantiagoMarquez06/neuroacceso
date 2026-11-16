@@ -34,13 +34,13 @@ Pasos para pasar de "tengo el casco en la caja" a "veo datos en mi programa". Ha
 python --version        # 3.10 o superior
 python -m venv .venv
 .venv\Scripts\activate
-pip install -e .
+cd legacy && pip install -e .
 ```
 
 ## 5. Primera prueba
 
 ```bash
-python scripts/probar_conexion.py
+python legacy/scripts/probar_conexion.py
 ```
 
 - La **primera vez**, el EMOTIV Launcher mostrará un aviso pidiendo **aprobar la aplicación**. Aprobarla y volver a ejecutar el script.
