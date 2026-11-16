@@ -7,6 +7,7 @@ Propuesta de proyecto de software · Universidad Católica de Cuenca · 2026
 > **Estado (noviembre 2026): de prototipo a sistema real.** Lo que hay hoy en `src/` es el **prototipo** (Python + tkinter, con demo sin casco). El sistema definitivo se construye en paralelo en dos partes — **motor** (Santiago) e **interfaz** (Jonnathan) — unidas por un contrato:
 > - 📋 [División del trabajo](docs/division-del-trabajo.md)
 > - 🏗️ [Arquitectura del sistema](docs/arquitectura-sistema.md)
+> - 🖥️ [Especificación de pantallas](docs/pantallas.md)
 > - 🤝 [Contrato API v1 (borrador)](contrato/api-v1.md)
 
 ---

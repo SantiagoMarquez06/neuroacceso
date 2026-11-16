@@ -7,6 +7,7 @@
 | **Duración** | 12 semanas · semana 1 = lunes 16 de noviembre de 2026 |
 | **Arquitectura** | [arquitectura-sistema.md](arquitectura-sistema.md) |
 | **Contrato entre las partes** | [../contrato/api-v1.md](../contrato/api-v1.md) |
+| **Pantallas (para la interfaz)** | [pantallas.md](pantallas.md) |
 
 ---
 
