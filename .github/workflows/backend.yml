@@ -1,0 +1,37 @@
+name: Motor (backend)
+
+on:
+  pull_request:
+    paths: ["backend/**", "contrato/**", "legacy/**", ".github/workflows/backend.yml"]
+  push:
+    branches: [main]
+    paths: ["backend/**", "contrato/**", "legacy/**", ".github/workflows/backend.yml"]
+
+jobs:
+  backend:
+    runs-on: windows-latest   # el motor controla el ratón de Windows
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync
+      - run: uv run ruff check
+      - run: uv run mypy src
+      - run: uv run pytest -q
+
+  legacy:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: legacy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[demo,dev]"
+      - run: python -m pytest -q
