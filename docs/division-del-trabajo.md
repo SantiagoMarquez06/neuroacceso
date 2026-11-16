@@ -71,6 +71,12 @@ Todo lo que **ve y usa la persona** (`frontend/`):
 
 ---
 
+## Estado al 16 de noviembre de 2026
+| Parte | Estado |
+|---|---|
+| **A · Motor (Santiago)** | **Versión 1.0 completa** en `backend/`: todas las tareas de F0–F5 del motor (issues cerrados). Contrato v1 exportado en `contrato/` (openapi, JSON Schema y ejemplos). Ejecutable de escritorio y 83 pruebas automáticas. Pendiente solo lo que requiere el casco real: puntos de integración y grabaciones ([integracion.md](integracion.md)). |
+| **B · Interfaz (Jonnathan)** | Por iniciar. Puede trabajar desde ya contra `python -m neuroacceso_motor --demo --dev` y los ejemplos de `contrato/ejemplos/`. |
+
 ## 3. Plan por fases
 
 Cada tarea es un **issue** en GitHub con su etiqueta (`parte-A-motor` / `parte-B-interfaz` / `conjunto`) y su milestone (F0–F5).

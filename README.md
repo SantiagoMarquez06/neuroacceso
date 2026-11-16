@@ -4,7 +4,7 @@
 
 Propuesta de proyecto de software · Universidad Católica de Cuenca · 2026
 
-> **Estado (noviembre 2026): de prototipo a sistema real.** El **prototipo** está en `legacy/` (Python + tkinter, con demo sin casco). El sistema definitivo se construye en paralelo en dos partes — **motor** (Santiago) e **interfaz** (Jonnathan) — unidas por un contrato:
+> **Estado (noviembre 2026): de prototipo a sistema real.** El **prototipo** está en `legacy/` (Python + tkinter, con demo sin casco). El sistema definitivo se construye en paralelo en dos partes — **motor** (Santiago) e **interfaz** (Jonnathan) — unidas por un contrato. **El motor (backend) está completo**: API v1, casco real y simulado, modos, calibración, métricas, base de datos, ejecutable de escritorio y 83 pruebas automáticas ([backend/README.md](backend/README.md)).
 > - 📋 [División del trabajo](docs/division-del-trabajo.md)
 > - 🏗️ [Arquitectura del sistema](docs/arquitectura-sistema.md)
 > - 🖥️ [Especificación de pantallas](docs/pantallas.md)
@@ -91,7 +91,7 @@ Detalle completo en [docs/arquitectura.md](docs/arquitectura.md) y [docs/cortex-
 
 ```
 neuroacceso/
-├── backend/        ← MOTOR (Santiago): servicio Python + FastAPI — en construcción
+├── backend/        ← MOTOR (Santiago): servicio Python + FastAPI — versión 1.0 completa
 ├── frontend/       ← INTERFAZ (Jonnathan): React + TypeScript — en construcción
 ├── contrato/       ← API v1 que une motor e interfaz
 ├── legacy/         ← prototipo funcional (tkinter) con demo sin casco
