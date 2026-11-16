@@ -21,7 +21,9 @@
         "usuario",
         "gesto_rescate",
         "ui_desconectada",
-        "calibracion"
+        "calibracion",
+        "entrenamiento",
+        "conexion"
       ],
       "title": "Motivo",
       "type": "string"

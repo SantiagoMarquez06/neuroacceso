@@ -42,10 +42,1815 @@
           }
         }
       }
+    },
+    "/api/v1/estado": {
+      "get": {
+        "summary": "Estado",
+        "operationId": "estado_api_v1_estado_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estado"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conexion": {
+      "post": {
+        "summary": "Conectar",
+        "operationId": "conectar_api_v1_conexion_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/PedirConexion"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": " "
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Desconectar",
+        "operationId": "desconectar_api_v1_conexion_delete",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/modo": {
+      "put": {
+        "summary": "Modo",
+        "operationId": "modo_api_v1_modo_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CambioModo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModoActual"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calibracion": {
+      "post": {
+        "summary": "Calibrar",
+        "operationId": "calibrar_api_v1_calibracion_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/PedirCalibracion"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": " "
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Cancelar Calibracion",
+        "operationId": "cancelar_calibracion_api_v1_calibracion_delete",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/gestos/disponibles": {
+      "get": {
+        "summary": "Gestos",
+        "operationId": "gestos_api_v1_gestos_disponibles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GestosDisponibles"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/perfiles": {
+      "get": {
+        "summary": "Perfiles",
+        "operationId": "perfiles_api_v1_perfiles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Perfil"
+                  },
+                  "type": "array",
+                  "title": "Response Perfiles Api V1 Perfiles Get"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear Perfil",
+        "operationId": "crear_perfil_api_v1_perfiles_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilCrear"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Perfil"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/perfiles/{pid}": {
+      "get": {
+        "summary": "Perfil",
+        "operationId": "perfil_api_v1_perfiles__pid__get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Perfil"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Editar Perfil",
+        "operationId": "editar_perfil_api_v1_perfiles__pid__patch",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilEditar"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Perfil"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Borrar Perfil",
+        "operationId": "borrar_perfil_api_v1_perfiles__pid__delete",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/perfiles/{pid}/activar": {
+      "post": {
+        "summary": "Activar",
+        "operationId": "activar_api_v1_perfiles__pid__activar_post",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estado"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/perfiles/{pid}/ajustes": {
+      "get": {
+        "summary": "Ajustes",
+        "operationId": "ajustes_api_v1_perfiles__pid__ajustes_get",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ajustes"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Guardar Ajustes",
+        "operationId": "guardar_ajustes_api_v1_perfiles__pid__ajustes_put",
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ajustes"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ajustes"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sesiones": {
+      "post": {
+        "summary": "Crear Sesion",
+        "operationId": "crear_sesion_api_v1_sesiones_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SesionCrear"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sesion"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Sesiones",
+        "operationId": "sesiones_api_v1_sesiones_get",
+        "parameters": [
+          {
+            "name": "perfil_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Perfil Id"
+            }
+          },
+          {
+            "name": "desde",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Desde"
+            }
+          },
+          {
+            "name": "hasta",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Hasta"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Sesion"
+                  },
+                  "title": "Response Sesiones Api V1 Sesiones Get"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sesiones/exportar.csv": {
+      "get": {
+        "summary": "Exportar",
+        "operationId": "exportar_api_v1_sesiones_exportar_csv_get",
+        "parameters": [
+          {
+            "name": "perfil_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Perfil Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sesiones/{sid}": {
+      "get": {
+        "summary": "Sesion",
+        "operationId": "sesion_api_v1_sesiones__sid__get",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sesion"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sesiones/{sid}/intentos": {
+      "post": {
+        "summary": "Intentos",
+        "operationId": "intentos_api_v1_sesiones__sid__intentos_post",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Intento"
+                },
+                "title": "Lista"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sesiones/{sid}/enunciados": {
+      "post": {
+        "summary": "Enunciados",
+        "operationId": "enunciados_api_v1_sesiones__sid__enunciados_post",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Enunciado"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sesiones/{sid}/finalizar": {
+      "post": {
+        "summary": "Finalizar",
+        "operationId": "finalizar_api_v1_sesiones__sid__finalizar_post",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sesion"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/entrenamiento": {
+      "post": {
+        "summary": "Entrenar",
+        "operationId": "entrenar_api_v1_entrenamiento_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedirEntrenamiento"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntrenamientoIniciado"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/entrenamiento/{eid}/aceptar": {
+      "post": {
+        "summary": "Aceptar",
+        "operationId": "aceptar_api_v1_entrenamiento__eid__aceptar_post",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Eid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/entrenamiento/{eid}/rechazar": {
+      "post": {
+        "summary": "Rechazar",
+        "operationId": "rechazar_api_v1_entrenamiento__eid__rechazar_post",
+        "parameters": [
+          {
+            "name": "eid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Eid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/voz/hablar": {
+      "post": {
+        "summary": "Hablar",
+        "operationId": "hablar_api_v1_voz_hablar_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedirVoz"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Ajustes": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "const": 1,
+            "title": "Version",
+            "default": 1
+          },
+          "cursor": {
+            "$ref": "#/components/schemas/AjustesCursor",
+            "default": {
+              "ganancia_x": 25.0,
+              "ganancia_y": 25.0,
+              "zona_muerta": 0.3,
+              "suavizado": 0.5,
+              "invertir_x": false,
+              "invertir_y": false
+            }
+          },
+          "gestos": {
+            "$ref": "#/components/schemas/AjustesGestos",
+            "default": {
+              "umbral": 0.4,
+              "cooldown_ms": 1000,
+              "mapeo": {
+                "comunicador": {
+                  "clench": "seleccionar",
+                  "winkR": "seleccionar"
+                },
+                "cursor": {
+                  "clench": "clic",
+                  "winkL": "pausar",
+                  "winkR": "clic_derecho"
+                }
+              },
+              "gesto_rescate": "surprise"
+            }
+          },
+          "dwell": {
+            "$ref": "#/components/schemas/AjustesDwell",
+            "default": {
+              "activo": false,
+              "ms": 1000,
+              "radio_px": 30
+            }
+          },
+          "comunicador": {
+            "$ref": "#/components/schemas/AjustesComunicador",
+            "default": {
+              "tiempo_barrido_ms": 1200,
+              "frases": [
+                "Sí",
+                "No",
+                "Tengo sed",
+                "Tengo dolor",
+                "Necesito ayuda",
+                "Gracias"
+              ],
+              "disposicion": "abc"
+            }
+          },
+          "voz": {
+            "$ref": "#/components/schemas/AjustesVoz",
+            "default": {
+              "velocidad": 150
+            }
+          }
+        },
+        "type": "object",
+        "title": "Ajustes"
+      },
+      "AjustesComunicador": {
+        "properties": {
+          "tiempo_barrido_ms": {
+            "type": "integer",
+            "maximum": 5000.0,
+            "minimum": 300.0,
+            "title": "Tiempo Barrido Ms",
+            "default": 1200
+          },
+          "frases": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Frases",
+            "default": [
+              "Sí",
+              "No",
+              "Tengo sed",
+              "Tengo dolor",
+              "Necesito ayuda",
+              "Gracias"
+            ]
+          },
+          "disposicion": {
+            "type": "string",
+            "enum": [
+              "abc",
+              "frecuencia"
+            ],
+            "title": "Disposicion",
+            "default": "abc"
+          }
+        },
+        "type": "object",
+        "title": "AjustesComunicador"
+      },
+      "AjustesCursor": {
+        "properties": {
+          "ganancia_x": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Ganancia X",
+            "default": 25
+          },
+          "ganancia_y": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Ganancia Y",
+            "default": 25
+          },
+          "zona_muerta": {
+            "type": "number",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Zona Muerta",
+            "default": 0.3
+          },
+          "suavizado": {
+            "type": "number",
+            "maximum": 0.95,
+            "minimum": 0.0,
+            "title": "Suavizado",
+            "default": 0.5
+          },
+          "invertir_x": {
+            "type": "boolean",
+            "title": "Invertir X",
+            "default": false
+          },
+          "invertir_y": {
+            "type": "boolean",
+            "title": "Invertir Y",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "AjustesCursor"
+      },
+      "AjustesDwell": {
+        "properties": {
+          "activo": {
+            "type": "boolean",
+            "title": "Activo",
+            "default": false
+          },
+          "ms": {
+            "type": "integer",
+            "maximum": 5000.0,
+            "minimum": 300.0,
+            "title": "Ms",
+            "default": 1000
+          },
+          "radio_px": {
+            "type": "integer",
+            "maximum": 200.0,
+            "minimum": 5.0,
+            "title": "Radio Px",
+            "default": 30
+          }
+        },
+        "type": "object",
+        "title": "AjustesDwell"
+      },
+      "AjustesGestos": {
+        "properties": {
+          "umbral": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.05,
+            "title": "Umbral",
+            "default": 0.4
+          },
+          "cooldown_ms": {
+            "type": "integer",
+            "maximum": 5000.0,
+            "minimum": 100.0,
+            "title": "Cooldown Ms",
+            "default": 1000
+          },
+          "mapeo": {
+            "$ref": "#/components/schemas/MapeoGestos",
+            "default": {
+              "cursor": {
+                "clench": "clic",
+                "winkL": "pausar",
+                "winkR": "clic_derecho"
+              },
+              "comunicador": {
+                "clench": "seleccionar",
+                "winkR": "seleccionar"
+              }
+            }
+          },
+          "gesto_rescate": {
+            "type": "string",
+            "title": "Gesto Rescate",
+            "default": "surprise"
+          }
+        },
+        "type": "object",
+        "title": "AjustesGestos"
+      },
+      "AjustesVoz": {
+        "properties": {
+          "voz_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Voz Id"
+          },
+          "velocidad": {
+            "type": "integer",
+            "maximum": 300.0,
+            "minimum": 50.0,
+            "title": "Velocidad",
+            "default": 150
+          }
+        },
+        "type": "object",
+        "title": "AjustesVoz"
+      },
+      "CambioModo": {
+        "properties": {
+          "modo": {
+            "type": "string",
+            "enum": [
+              "cursor",
+              "comunicador",
+              "pausa"
+            ],
+            "title": "Modo"
+          }
+        },
+        "type": "object",
+        "required": [
+          "modo"
+        ],
+        "title": "CambioModo"
+      },
+      "Conexion": {
+        "properties": {
+          "estado": {
+            "type": "string",
+            "enum": [
+              "desconectado",
+              "conectando",
+              "conectado",
+              "error"
+            ],
+            "title": "Estado",
+            "default": "desconectado"
+          },
+          "casco_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Casco Id"
+          },
+          "detalle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detalle"
+          }
+        },
+        "type": "object",
+        "title": "Conexion"
+      },
+      "EntrenamientoIniciado": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "title": "EntrenamientoIniciado"
+      },
+      "Enunciado": {
+        "properties": {
+          "texto": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Texto"
+          },
+          "duracion_ms": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Duracion Ms"
+          },
+          "selecciones": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Selecciones",
+            "default": 0
+          },
+          "correcciones": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Correcciones",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "texto",
+          "duracion_ms"
+        ],
+        "title": "Enunciado"
+      },
       "Error": {
         "properties": {
           "codigo": {
@@ -88,6 +1893,523 @@
         ],
         "title": "Error"
       },
+      "Estado": {
+        "properties": {
+          "conexion": {
+            "$ref": "#/components/schemas/Conexion"
+          },
+          "modo": {
+            "type": "string",
+            "enum": [
+              "desconectado",
+              "calibrando",
+              "cursor",
+              "comunicador",
+              "pausa",
+              "entrenando"
+            ],
+            "title": "Modo",
+            "default": "desconectado"
+          },
+          "pausado": {
+            "type": "boolean",
+            "title": "Pausado",
+            "default": false
+          },
+          "calibrado": {
+            "type": "boolean",
+            "title": "Calibrado",
+            "default": false
+          },
+          "perfil_activo_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perfil Activo Id"
+          },
+          "latencia_ms": {
+            "$ref": "#/components/schemas/Latencia"
+          }
+        },
+        "type": "object",
+        "title": "Estado"
+      },
+      "GestosDisponibles": {
+        "properties": {
+          "facial": {
+            "$ref": "#/components/schemas/GestosFaciales"
+          },
+          "mental": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Mental"
+          }
+        },
+        "type": "object",
+        "required": [
+          "facial",
+          "mental"
+        ],
+        "title": "GestosDisponibles"
+      },
+      "GestosFaciales": {
+        "properties": {
+          "ojos": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ojos"
+          },
+          "superior": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Superior"
+          },
+          "inferior": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Inferior"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ojos",
+          "superior",
+          "inferior"
+        ],
+        "title": "GestosFaciales"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Intento": {
+        "properties": {
+          "n": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "N"
+          },
+          "t_inicio_ms": {
+            "type": "number",
+            "title": "T Inicio Ms"
+          },
+          "t_fin_ms": {
+            "type": "number",
+            "title": "T Fin Ms"
+          },
+          "objetivo": {
+            "$ref": "#/components/schemas/Objetivo"
+          },
+          "origen": {
+            "$ref": "#/components/schemas/Punto"
+          },
+          "clic": {
+            "$ref": "#/components/schemas/Punto"
+          },
+          "acierto": {
+            "type": "boolean",
+            "title": "Acierto"
+          },
+          "dpr": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Dpr",
+            "default": 1
+          }
+        },
+        "type": "object",
+        "required": [
+          "n",
+          "t_inicio_ms",
+          "t_fin_ms",
+          "objetivo",
+          "origen",
+          "clic",
+          "acierto"
+        ],
+        "title": "Intento"
+      },
+      "Latencia": {
+        "properties": {
+          "p50": {
+            "type": "number",
+            "title": "P50",
+            "default": 0
+          },
+          "p95": {
+            "type": "number",
+            "title": "P95",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "Latencia"
+      },
+      "MapeoGestos": {
+        "properties": {
+          "cursor": {
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "clic",
+                "clic_derecho",
+                "doble_clic",
+                "pausar",
+                "seleccionar",
+                "atras",
+                "cambiar_modo",
+                "ninguna"
+              ]
+            },
+            "type": "object",
+            "title": "Cursor",
+            "default": {
+              "clench": "clic",
+              "winkR": "clic_derecho",
+              "winkL": "pausar"
+            }
+          },
+          "comunicador": {
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "clic",
+                "clic_derecho",
+                "doble_clic",
+                "pausar",
+                "seleccionar",
+                "atras",
+                "cambiar_modo",
+                "ninguna"
+              ]
+            },
+            "type": "object",
+            "title": "Comunicador",
+            "default": {
+              "clench": "seleccionar",
+              "winkR": "seleccionar"
+            }
+          }
+        },
+        "type": "object",
+        "title": "MapeoGestos"
+      },
+      "Metricas": {
+        "properties": {
+          "throughput_bps": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Throughput Bps"
+          },
+          "tiempo_medio_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tiempo Medio Ms"
+          },
+          "precision": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precision"
+          },
+          "falsos_positivos_min": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Falsos Positivos Min"
+          },
+          "caracteres_min": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Caracteres Min"
+          }
+        },
+        "type": "object",
+        "title": "Metricas"
+      },
+      "ModoActual": {
+        "properties": {
+          "modo": {
+            "type": "string",
+            "enum": [
+              "desconectado",
+              "calibrando",
+              "cursor",
+              "comunicador",
+              "pausa",
+              "entrenando"
+            ],
+            "title": "Modo"
+          },
+          "pausado": {
+            "type": "boolean",
+            "title": "Pausado"
+          }
+        },
+        "type": "object",
+        "required": [
+          "modo",
+          "pausado"
+        ],
+        "title": "ModoActual"
+      },
+      "Objetivo": {
+        "properties": {
+          "x": {
+            "type": "number",
+            "title": "X"
+          },
+          "y": {
+            "type": "number",
+            "title": "Y"
+          },
+          "ancho": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Ancho"
+          }
+        },
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "ancho"
+        ],
+        "title": "Objetivo"
+      },
+      "PedirCalibracion": {
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "const": "centro",
+            "title": "Tipo",
+            "default": "centro"
+          }
+        },
+        "type": "object",
+        "title": "PedirCalibracion"
+      },
+      "PedirConexion": {
+        "properties": {
+          "fuente": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "cortex",
+                  "simulador",
+                  "replay"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fuente"
+          }
+        },
+        "type": "object",
+        "title": "PedirConexion"
+      },
+      "PedirEntrenamiento": {
+        "properties": {
+          "deteccion": {
+            "type": "string",
+            "enum": [
+              "mental",
+              "facial"
+            ],
+            "title": "Deteccion"
+          },
+          "accion": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 1,
+            "title": "Accion"
+          }
+        },
+        "type": "object",
+        "required": [
+          "deteccion",
+          "accion"
+        ],
+        "title": "PedirEntrenamiento"
+      },
+      "PedirVoz": {
+        "properties": {
+          "texto": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Texto"
+          }
+        },
+        "type": "object",
+        "required": [
+          "texto"
+        ],
+        "title": "PedirVoz"
+      },
+      "Perfil": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "nombre": {
+            "type": "string",
+            "title": "Nombre"
+          },
+          "cortex_profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cortex Profile"
+          },
+          "creado_en": {
+            "type": "string",
+            "title": "Creado En"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nombre",
+          "creado_en"
+        ],
+        "title": "Perfil"
+      },
+      "PerfilCrear": {
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Nombre"
+          },
+          "cortex_profile": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cortex Profile"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nombre"
+        ],
+        "title": "PerfilCrear"
+      },
+      "PerfilEditar": {
+        "properties": {
+          "nombre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre"
+          },
+          "cortex_profile": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cortex Profile"
+          }
+        },
+        "type": "object",
+        "title": "PerfilEditar"
+      },
+      "Punto": {
+        "properties": {
+          "x": {
+            "type": "number",
+            "title": "X"
+          },
+          "y": {
+            "type": "number",
+            "title": "Y"
+          }
+        },
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "title": "Punto"
+      },
       "Salud": {
         "properties": {
           "version": {
@@ -120,6 +2442,118 @@
           "demo"
         ],
         "title": "Salud"
+      },
+      "Sesion": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "perfil_id": {
+            "type": "string",
+            "title": "Perfil Id"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "libre",
+              "practica",
+              "comunicador"
+            ],
+            "title": "Tipo"
+          },
+          "inicio": {
+            "type": "string",
+            "title": "Inicio"
+          },
+          "fin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin"
+          },
+          "metricas": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metricas"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "perfil_id",
+          "tipo",
+          "inicio"
+        ],
+        "title": "Sesion"
+      },
+      "SesionCrear": {
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "libre",
+              "practica",
+              "comunicador"
+            ],
+            "title": "Tipo"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tipo"
+        ],
+        "title": "SesionCrear"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
       }
     }
   }

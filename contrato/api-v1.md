@@ -5,7 +5,7 @@
 ## Generalidades
 - **Base REST:** `http://127.0.0.1:{puerto}/api/v1`
 - **WebSocket:** `ws://127.0.0.1:{puerto}/api/v1/eventos?token={token}`
-- **Autenticación:** todas las peticiones REST llevan `Authorization: Bearer {token}`. El token se genera en cada arranque del motor y se inyecta en la ventana (`window.__NA_TOKEN__`). En desarrollo, el motor lo imprime en consola.
+- **Autenticación:** todas las peticiones REST llevan `Authorization: Bearer {token}` y el WebSocket `?token={token}`. El token se genera en cada arranque del motor y llega a la interfaz en el **fragmento de la URL** (`http://127.0.0.1:{puerto}/#token=…`): la interfaz lo lee de `location.hash` (el fragmento nunca se envía al servidor ni queda en logs). En desarrollo, el motor imprime el token y la URL en consola; con Vite se abre `http://localhost:5173/#token=…` y el motor se arranca con `--dev`.
 - **Formato:** JSON, `snake_case`, fechas ISO 8601 en UTC, tiempos en milisegundos.
 - **Errores:** código HTTP adecuado + cuerpo `{ "codigo": "...", "mensaje": "...", "detalle": {...}? }`
 
@@ -51,6 +51,10 @@
 | `POST /dev/simular/gesto` *(solo `--demo`)* | `{ gesto, potencia? }` | `204` |
 | `POST /dev/simular/cabeza` *(solo `--demo`)* | `{ yaw, pitch }` | `204` |
 | `POST /dev/simular/contacto` *(solo `--demo`)* | `{ malo: bool }` | `204` |
+| `GET /sesiones/exportar.csv?perfil_id` | – | CSV con las sesiones y sus métricas |
+| `POST /voz/hablar` | `{ texto }` | `202` — voz de respaldo desde el motor (SAPI) |
+| `POST /entrenamiento` *(v1.1)* | `{ deteccion: "mental"\|"facial", accion }` | `202 { id }` — progreso por el evento `entrenamiento` |
+| `POST /entrenamiento/{id}/aceptar` · `/rechazar` *(v1.1)* | – | `204` |
 
 ## Esquemas
 
@@ -122,12 +126,17 @@ Sobre común:
 | `gesto` | `{ gesto, zona: "ojos"\|"superior"\|"inferior"\|"mental", potencia }` | al cambiar (detección cruda, para feedback) |
 | `accion` | `{ accion, origen: { tipo: "gesto"\|"mental"\|"dwell"\|"interfaz", nombre }, modo, ejecutada, motivo?: "pausado"\|"cooldown"\|"bajo_umbral" }` | por acción |
 | `entrada` | `{ accion: "seleccionar"\|"atras" }` | solo en modo `comunicador` |
-| `modo` | `{ modo, pausado, motivo: "usuario"\|"gesto_rescate"\|"ui_desconectada"\|"calibracion" }` | al cambiar |
+| `modo` | `{ modo, pausado, motivo: "usuario"\|"gesto_rescate"\|"ui_desconectada"\|"calibracion"\|"entrenamiento"\|"conexion" }` | al cambiar |
+| `entrenamiento` *(v1.1)* | `{ fase: "iniciado"\|"exito"\|"fallo"\|"guardado"\|"rechazado", deteccion, accion }` | durante un entrenamiento |
 | `calibracion` | `{ estado: "en_curso"\|"completada"\|"fallida"\|"cancelada", progreso: 0-1, instruccion }` | ~5 Hz mientras dura |
 | `ajustes` | `{ perfil_id, ajustes: Ajustes }` | al cambiar |
 | `error` | `{ codigo, mensaje, recuperable }` | por error |
 
-## Reservado para v1.1 (entrenamiento · semana 7)
-- `POST /entrenamiento` `{ deteccion: "mental"|"facial", accion }` → `{ id }`
-- `POST /entrenamiento/{id}/aceptar` · `POST /entrenamiento/{id}/rechazar`
-- Evento `entrenamiento` `{ fase: "iniciado"|"exito"|"fallo"|"guardado", accion }` (traducido de los eventos `sys` de Cortex).
+## Comportamiento del motor (lo que la interfaz puede esperar)
+- **Al arrancar** el motor se conecta solo y **calibra** (modo `calibrando`, eventos `calibracion`); al terminar pasa a `cursor`. Si se cancela una calibración sin centro previo, queda en `pausa`.
+- **Si se pierde el casco** emite `conexion` (`error`, con `codigo`) y `error`, pasa a `desconectado` y **reintenta solo** (1 s, 2 s, 4 s… hasta 30 s).
+- **Modo comunicador:** los gestos mapeados a `seleccionar`/`atras` llegan como evento `entrada`; el ratón no se mueve ni hace clic.
+- **Gesto de rescate** (`ajustes.gestos.gesto_rescate`, por defecto `surprise` = cejas arriba): alterna cursor ↔ comunicador desde cualquier modo de usuario.
+- **Si se cierra la última interfaz** estando en `comunicador`, el motor vuelve a `cursor` (`motivo: "ui_desconectada"`).
+- **Un gesto sostenido** dispara una sola acción, cuando supera el umbral por primera vez; el evento `gesto` se emite en cada cambio, aunque no supere el umbral (sirve de retroalimentación).
+- **Métricas** (`POST /sesiones/{id}/finalizar`): rendimiento de Fitts ISO 9241-411 con ancho efectivo (un `Intento` por clic), precisión, falsos positivos/min (clics fuera del objetivo por minuto), caracteres/min (de los enunciados).

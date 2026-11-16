@@ -96,8 +96,9 @@ def test_contrato_exportado_al_dia():
 
 
 def test_docs_solo_en_dev(cliente):
-    assert cliente.get("/docs").status_code == 404
-    assert cliente.get("/openapi.json").status_code == 404
+    # Fuera de dev esas rutas caen en la interfaz (SPA), no en la documentación.
+    assert "swagger" not in cliente.get("/docs").text.lower()
+    assert '"openapi"' not in cliente.get("/openapi.json").text
 
 
 def test_options_sin_dev_exige_token(cliente):

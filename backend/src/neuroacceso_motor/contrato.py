@@ -168,6 +168,63 @@ class Intento(BaseModel):
     dpr: float = Field(1, gt=0)
 
 
+class SesionCrear(BaseModel):
+    tipo: Literal["libre", "practica", "comunicador"]
+
+
+class Enunciado(BaseModel):
+    texto: str = Field(max_length=2000)
+    duracion_ms: float = Field(ge=0)
+    selecciones: int = Field(0, ge=0)
+    correcciones: int = Field(0, ge=0)
+
+
+class PedirConexion(BaseModel):
+    fuente: Fuente | None = None
+
+
+class PedirCalibracion(BaseModel):
+    tipo: Literal["centro"] = "centro"
+
+
+class GestosFaciales(BaseModel):
+    ojos: list[str]
+    superior: list[str]
+    inferior: list[str]
+
+
+class GestosDisponibles(BaseModel):
+    facial: GestosFaciales
+    mental: list[str]
+
+
+class PedirEntrenamiento(BaseModel):
+    deteccion: Literal["mental", "facial"]
+    accion: str = Field(min_length=1, max_length=30)
+
+
+class EntrenamientoIniciado(BaseModel):
+    id: str
+
+
+class PedirVoz(BaseModel):
+    texto: str = Field(min_length=1, max_length=2000)
+
+
+class SimularGesto(BaseModel):
+    gesto: str
+    potencia: float | None = None
+
+
+class SimularCabeza(BaseModel):
+    yaw: float = Field(ge=-180, le=180)
+    pitch: float = Field(ge=-90, le=90)
+
+
+class SimularContacto(BaseModel):
+    malo: bool
+
+
 # --------------------------------------------------------------- eventos WS
 class EvHola(BaseModel):
     version: str
@@ -218,7 +275,8 @@ class EvEntrada(BaseModel):
 class EvModo(BaseModel):
     modo: Modo
     pausado: bool
-    motivo: Literal["usuario", "gesto_rescate", "ui_desconectada", "calibracion"]
+    motivo: Literal["usuario", "gesto_rescate", "ui_desconectada", "calibracion", "entrenamiento",
+                    "conexion"]
 
 
 class EvCalibracion(BaseModel):
@@ -238,10 +296,17 @@ class EvError(BaseModel):
     recuperable: bool
 
 
+class EvEntrenamiento(BaseModel):
+    fase: Literal["iniciado", "exito", "fallo", "guardado", "rechazado"]
+    deteccion: Literal["mental", "facial"]
+    accion: str
+
+
 EVENTOS: dict[str, type[BaseModel]] = {
     "hola": EvHola, "conexion": EvConexion, "dispositivo": EvDispositivo,
     "orientacion": EvOrientacion, "gesto": EvGesto, "accion": EvAccion, "entrada": EvEntrada,
     "modo": EvModo, "calibracion": EvCalibracion, "ajustes": EvAjustes, "error": EvError,
+    "entrenamiento": EvEntrenamiento,
 }
 
 
@@ -276,4 +341,5 @@ EJEMPLOS: dict[str, BaseModel] = {
     "ajustes": EvAjustes(perfil_id="p-1", ajustes=Ajustes()),
     "error": EvError(codigo="CASCO_DESCONECTADO", mensaje="El casco se desconectó",
                      recuperable=True),
+    "entrenamiento": EvEntrenamiento(fase="exito", deteccion="mental", accion="push"),
 }
