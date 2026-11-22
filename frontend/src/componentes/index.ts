@@ -10,6 +10,7 @@ export { IndicadorOrientacion } from './IndicadorOrientacion';
 export {
   BarraProgreso,
   Bateria,
+  BATERIA_BAJA,
   IndicadorEstado,
   Medidor,
   type TonoIndicador,

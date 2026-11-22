@@ -21,14 +21,14 @@ export function Tarjeta({ titulo, nivel = 2, acciones, className, children }: Pr
       aria-labelledby={titulo ? idTitulo : undefined}
     >
       {(titulo || acciones) && (
-        <header className={estilos.cabecera}>
+        <div className={estilos.cabecera}>
           {titulo && (
             <Encabezado id={idTitulo} className={estilos.titulo}>
               {titulo}
             </Encabezado>
           )}
           {acciones}
-        </header>
+        </div>
       )}
       {children}
     </section>

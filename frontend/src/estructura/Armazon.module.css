@@ -1,0 +1,200 @@
+.armazon {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
+  height: 100vh;
+}
+
+/* Primer elemento al tabular: lleva directo al contenido. Solo se ve cuando tiene el foco. */
+.saltar {
+  position: absolute;
+  top: var(--esp-2);
+  left: var(--esp-2);
+  z-index: 60;
+  padding: var(--esp-3) var(--esp-4);
+  border-radius: var(--radio-chico);
+  background: var(--accion);
+  color: var(--sobre-accion);
+  font-weight: var(--peso-fuerte);
+  transform: translateY(-200%);
+}
+
+.saltar:focus {
+  transform: none;
+}
+
+/* ---- Barra superior: el estado del sistema, siempre visible ------------------------------ */
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: var(--esp-2) var(--esp-5);
+  padding: var(--esp-2) var(--esp-5);
+  border-bottom: var(--borde) solid var(--linea-suave);
+  background: var(--superficie);
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-height: var(--objetivo);
+  color: var(--texto);
+  font-size: var(--t-grande);
+  font-weight: var(--peso-fuerte);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.marca svg {
+  width: 2.2rem;
+  height: 2.2rem;
+  fill: none;
+  stroke: var(--accion);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.marca .marcaPunto {
+  fill: var(--bien);
+  stroke: none;
+}
+
+.perfil {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  min-height: var(--objetivo);
+  padding: 0 var(--esp-4);
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  color: var(--texto);
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+  text-decoration: none;
+}
+
+.estados {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--esp-2) var(--esp-5);
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.estadoEnlace {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--objetivo);
+  text-decoration: none;
+}
+
+.bateria {
+  font-size: var(--t-medio);
+}
+
+/* ---- Menú lateral ------------------------------------------------------------------------ */
+.menu {
+  display: flex;
+  flex-direction: column;
+  grid-row: 2;
+  gap: var(--separacion);
+  width: 14.5rem;
+  padding: var(--esp-4);
+  overflow-y: auto;
+  border-right: var(--borde) solid var(--linea-suave);
+  background: var(--superficie);
+}
+
+.destino {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-height: var(--objetivo);
+  padding: var(--esp-2) var(--esp-4);
+  border: var(--borde) solid transparent;
+  border-radius: var(--radio);
+  color: var(--texto);
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+  text-decoration: none;
+}
+
+.destino:active {
+  transform: scale(0.97);
+}
+
+/* La pantalla actual se marca con relleno, borde y peso: no solo con color. */
+.destinoActivo {
+  border-color: var(--accion);
+  background: var(--accion);
+  color: var(--sobre-accion);
+  font-weight: var(--peso-fuerte);
+}
+
+/* ---- Contenido --------------------------------------------------------------------------- */
+.contenido {
+  display: flex;
+  flex-direction: column;
+  grid-row: 2;
+  grid-column: 2;
+  gap: var(--esp-5);
+  padding: var(--esp-5) var(--esp-6) var(--esp-6);
+  overflow-y: auto;
+}
+
+.contenido:focus {
+  outline: none;
+}
+
+.sinMenu .contenido {
+  grid-column: 1 / -1;
+  padding: var(--esp-4) var(--esp-5);
+}
+
+/* ---- Franja de retroalimentación --------------------------------------------------------- */
+.franja {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  min-height: 3.6rem;
+  padding: var(--esp-2) var(--esp-5);
+  border-top: var(--borde) solid var(--linea-suave);
+  background: var(--superficie);
+}
+
+.franjaReposo {
+  color: var(--texto-suave);
+}
+
+/* Ventanas estrechas: el menú se queda solo con los iconos (el texto sigue para lectores). */
+@media (max-width: 860px) {
+  .menu {
+    width: auto;
+    padding: var(--esp-3);
+  }
+
+  .destino {
+    justify-content: center;
+    padding: 0;
+    width: var(--objetivo);
+  }
+
+  .destinoTexto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .contenido {
+    padding: var(--esp-4);
+  }
+}
