@@ -1,0 +1,121 @@
+/*
+ * Design tokens de NeuroAcceso.
+ *
+ * Todo color, tamaño y espacio de la interfaz sale de aquí. Los pares de color que se usan juntos
+ * se comprueban contra WCAG AA en src/estilos/contraste.test.ts: si cambias un color y el
+ * contraste baja del mínimo, la prueba falla.
+ *
+ * Temas:   <html data-tema="oscuro">     (por defecto)
+ *          <html data-tema="contraste">  (alto contraste)
+ * Texto:   <html data-texto="normal | grande | muy-grande">
+ */
+
+:root {
+  /* ---- Tipografía ------------------------------------------------------------------------ */
+  /* Atkinson Hyperlegible: diseñada por el Braille Institute para baja visión (letras que no se
+     confunden entre sí: I l 1, O 0). Va empaquetada con la app: funciona sin internet. */
+  --fuente:
+    'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible Next', 'Segoe UI', system-ui,
+    sans-serif;
+  --escala: 1; /* la cambia data-texto */
+
+  --t-chico: 0.9rem; /* 16 px: notas y unidades */
+  --t-base: 1.125rem; /* 20 px: texto normal */
+  --t-medio: 1.375rem; /* 25 px: etiquetas de botones, datos */
+  --t-grande: 1.75rem; /* 31 px: títulos de sección */
+  --t-enorme: 2.5rem; /* 45 px: título de pantalla, teclas */
+  --t-titular: 3.25rem; /* 58 px: texto escrito en el comunicador */
+
+  --peso-normal: 400;
+  --peso-medio: 600;
+  --peso-fuerte: 750;
+
+  /* ---- Tamaños: apuntar con la cabeza es impreciso ---------------------------------------- */
+  --objetivo: max(64px, 3.6rem); /* lado mínimo de todo lo que se pulsa */
+  --objetivo-grande: max(88px, 5rem); /* teclas y acciones principales */
+  --separacion: 16px; /* espacio mínimo entre dos objetivos */
+
+  /* ---- Espaciado --------------------------------------------------------------------------- */
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-5: 24px;
+  --esp-6: 32px;
+  --esp-7: 48px;
+
+  /* ---- Forma ------------------------------------------------------------------------------- */
+  --radio: 14px;
+  --radio-chico: 8px;
+  --borde: 2px;
+  --borde-fuerte: 4px;
+  --ancho-foco: 4px;
+
+  --transicion: 120ms ease-out;
+}
+
+:root,
+:root[data-tema='oscuro'] {
+  color-scheme: dark;
+
+  --fondo: #0f1d26; /* tinta petróleo: menos fatiga que el negro puro */
+  --superficie: #17303d; /* tarjetas y barras */
+  --superficie-2: #20404f; /* controles y zonas elevadas */
+
+  --texto: #f3f7f5;
+  --texto-suave: #c0d0d7; /* texto secundario */
+
+  --linea: #7699ab; /* borde de controles: ≥ 3:1 sobre cualquier superficie */
+  --linea-suave: #2f4e5e; /* separadores decorativos (no transmiten información) */
+
+  --accion: #7dc4ff; /* botón principal, enlaces y GRUPO resaltado en el barrido */
+  --sobre-accion: #06202f;
+  --activo: #ffc857; /* ELEMENTO activo en el barrido y estado de pausa */
+  --sobre-activo: #2a1b00;
+
+  --bien: #6edc9a; /* conectado, buen contacto, acierto */
+  --aviso: #ffc857; /* atención: batería baja, contacto regular */
+  --mal: #ff8a80; /* error, mal contacto */
+  --apagado: #a3b5bd; /* desconectado, bloqueado */
+  --sobre-estado: #0b1a12; /* texto sobre un relleno de estado */
+
+  --foco: #ffffff;
+}
+
+:root[data-tema='contraste'] {
+  color-scheme: dark;
+
+  --fondo: #000000;
+  --superficie: #000000;
+  --superficie-2: #1c1c1c;
+
+  --texto: #ffffff;
+  --texto-suave: #ebebeb;
+
+  --linea: #ffffff;
+  --linea-suave: #8c8c8c;
+
+  --accion: #5ce1ff;
+  --sobre-accion: #000000;
+  --activo: #ffe500;
+  --sobre-activo: #000000;
+
+  --bien: #5cff8f;
+  --aviso: #ffe500;
+  --mal: #ff8478;
+  --apagado: #c8c8c8;
+  --sobre-estado: #000000;
+
+  --foco: #ffe500;
+
+  --borde: 3px;
+  --borde-fuerte: 5px;
+}
+
+:root[data-texto='grande'] {
+  --escala: 1.2;
+}
+
+:root[data-texto='muy-grande'] {
+  --escala: 1.4;
+}

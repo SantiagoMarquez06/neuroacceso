@@ -27,6 +27,6 @@ export default defineConfig({
     setupFiles: ['./src/pruebas/preparar.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
     restoreMocks: true,
-    css: false,
+    css: true, // la prueba de contraste lee los colores reales de tokens.css
   },
 });
