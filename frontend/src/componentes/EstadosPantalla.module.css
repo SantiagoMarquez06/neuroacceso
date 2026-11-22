@@ -1,0 +1,43 @@
+.estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-4);
+  min-height: 18rem;
+  padding: var(--esp-6);
+  text-align: center;
+}
+
+.titulo {
+  font-size: var(--t-grande);
+  font-weight: var(--peso-fuerte);
+}
+
+.detalle {
+  max-width: 56ch;
+  color: var(--texto-suave);
+}
+
+.icono {
+  color: var(--linea);
+}
+
+.iconoMal {
+  color: var(--mal);
+}
+
+.giro {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 6px solid var(--superficie-2);
+  border-top-color: var(--accion);
+  border-radius: 50%;
+  animation: girar 900ms linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}

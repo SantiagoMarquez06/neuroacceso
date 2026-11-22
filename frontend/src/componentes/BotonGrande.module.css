@@ -1,0 +1,80 @@
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-3);
+  min-width: var(--objetivo);
+  min-height: var(--objetivo);
+  padding: var(--esp-2) var(--esp-5);
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+  line-height: 1.15;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  transition:
+    transform var(--transicion),
+    background-color var(--transicion);
+}
+
+/* La pulsación se nota al instante (no depende de pasar el cursor por encima). */
+.boton:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.principal {
+  border-color: var(--accion);
+  background: var(--accion);
+  color: var(--sobre-accion);
+}
+
+.peligro {
+  border-color: var(--mal);
+  background: transparent;
+  color: var(--mal);
+}
+
+.fantasma {
+  border-color: transparent;
+  background: transparent;
+}
+
+.grande {
+  min-width: var(--objetivo-grande);
+  min-height: var(--objetivo-grande);
+  font-size: var(--t-grande);
+  font-weight: var(--peso-fuerte);
+}
+
+.completo {
+  width: 100%;
+}
+
+.soloIcono {
+  padding: 0;
+}
+
+/* Barrido: el grupo se rodea de azul; el elemento activo se rellena de ámbar. Además del color
+   cambian el grosor y el relleno, para quien no distingue bien los colores. */
+.barridoGrupo {
+  outline: var(--borde-fuerte) solid var(--accion);
+  outline-offset: 3px;
+}
+
+.barridoActivo {
+  border-color: var(--activo);
+  background: var(--activo);
+  color: var(--sobre-activo);
+  outline: var(--borde-fuerte) solid var(--activo);
+  outline-offset: 3px;
+  transform: scale(1.04);
+}

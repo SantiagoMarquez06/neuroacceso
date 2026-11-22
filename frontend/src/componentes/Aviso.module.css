@@ -1,0 +1,58 @@
+.caja {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-4);
+  padding: var(--esp-4) var(--esp-5);
+  border: var(--borde) solid var(--linea);
+  border-left-width: 10px;
+  border-radius: var(--radio);
+  background: var(--superficie);
+}
+
+.icono {
+  color: var(--linea);
+}
+
+.texto {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.titulo {
+  font-size: var(--t-medio);
+  font-weight: var(--peso-fuerte);
+}
+
+.detalle {
+  max-width: 70ch;
+  color: var(--texto-suave);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--separacion);
+}
+
+/* El tono cambia el color del borde y del icono; el icono también cambia de forma. */
+.bien {
+  border-color: var(--bien);
+}
+.bien .icono {
+  color: var(--bien);
+}
+
+.aviso {
+  border-color: var(--aviso);
+}
+.aviso .icono {
+  color: var(--aviso);
+}
+
+.mal {
+  border-color: var(--mal);
+}
+.mal .icono {
+  color: var(--mal);
+}

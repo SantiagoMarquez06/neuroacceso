@@ -1,0 +1,179 @@
+/* ---- Partes comunes ----------------------------------------------------------------------- */
+.campo,
+.deslizador {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  min-width: 0;
+}
+
+.etiqueta {
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+}
+
+.ayuda {
+  max-width: 62ch;
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+}
+
+.error {
+  color: var(--mal);
+  font-weight: var(--peso-medio);
+}
+
+.entrada {
+  width: 100%;
+  min-height: var(--objetivo);
+  padding: var(--esp-2) var(--esp-4);
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font-size: var(--t-medio);
+}
+
+.entrada[aria-invalid='true'] {
+  border-color: var(--mal);
+  border-width: var(--borde-fuerte);
+}
+
+.entrada:disabled {
+  opacity: 0.5;
+}
+
+/* ---- Deslizador --------------------------------------------------------------------------- */
+.cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--esp-4);
+}
+
+.valor {
+  color: var(--accion);
+  font-size: var(--t-grande);
+  font-weight: var(--peso-fuerte);
+  white-space: nowrap;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: var(--separacion);
+}
+
+.barra {
+  flex: 1;
+  min-width: 0;
+  height: var(--objetivo); /* toda la altura es zona de arrastre */
+  margin: 0;
+  background: transparent;
+  accent-color: var(--accion);
+  cursor: pointer;
+}
+
+.barra:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- Interruptor -------------------------------------------------------------------------- */
+.interruptor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-4);
+  width: 100%;
+  min-height: var(--objetivo);
+  padding: var(--esp-2) var(--esp-4);
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  text-align: left;
+}
+
+.interruptor:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.estadoInterruptor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-width: 6.5em;
+  font-size: var(--t-medio);
+  font-weight: var(--peso-fuerte);
+}
+
+.carril {
+  display: inline-flex;
+  align-items: center;
+  width: 64px;
+  height: 36px;
+  padding: 3px;
+  border: var(--borde) solid var(--linea);
+  border-radius: 999px;
+  background: var(--fondo);
+  transition: background-color var(--transicion);
+}
+
+.perilla {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--apagado);
+  transition: transform var(--transicion);
+}
+
+.interruptor[aria-checked='true'] .carril {
+  border-color: var(--bien);
+  background: var(--bien);
+}
+
+.interruptor[aria-checked='true'] .perilla {
+  background: var(--sobre-estado);
+  transform: translateX(28px);
+}
+
+/* ---- Pestanas ----------------------------------------------------------------------------- */
+.pestanas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  min-width: 0;
+}
+
+.listaPestanas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+}
+
+.pestana {
+  min-height: var(--objetivo);
+  padding: var(--esp-2) var(--esp-5);
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  background: transparent;
+  color: var(--texto);
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+}
+
+/* La pestaña activa cambia de relleno y de grosor de borde, no solo de color. */
+.pestana[aria-selected='true'] {
+  border-color: var(--accion);
+  background: var(--accion);
+  color: var(--sobre-accion);
+  font-weight: var(--peso-fuerte);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  min-width: 0;
+}
