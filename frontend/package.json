@@ -20,7 +20,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "tipos": "node scripts/generar-tipos.mjs",
-    "tipos:verificar": "node scripts/generar-tipos.mjs --verificar"
+    "tipos:verificar": "node scripts/generar-tipos.mjs --verificar",
+    "capturas": "node scripts/capturas.mjs"
   },
   "dependencies": {
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
+    "@playwright/test": "^1.65.1",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^8.0.0",
     "@testing-library/react": "^16.3.3",

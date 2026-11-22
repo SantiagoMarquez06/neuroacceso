@@ -138,3 +138,26 @@ cd frontend && npm run dev
 ```
 
 El motor imprime su token al arrancar. Abre `http://localhost:5173/#token=EL_TOKEN`. La dirección del motor en desarrollo está en [`.env.development`](.env.development) (`VITE_MOTOR_URL`); en producción la interfaz y la API comparten origen.
+
+## Trabajar sin backend (mocks)
+
+```bash
+npm run dev:mock   # http://localhost:5173, sin motor ni casco
+```
+
+La interfaz arranca completa contra un **motor simulado en el navegador**. No hace falta Python, ni token, ni casco:
+
+| Pieza                                                  | Qué hace                                                                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| [`src/mocks/motorFalso.ts`](src/mocks/motorFalso.ts)   | Motor en memoria que sigue el contrato: modos, calibración, perfiles, sesiones, métricas, gestos |
+| [`src/mocks/manejadores.ts`](src/mocks/manejadores.ts) | Manejadores [MSW](https://mswjs.io) para cada ruta REST **y para el WebSocket** de eventos       |
+| [`src/mocks/navegador.ts`](src/mocks/navegador.ts)     | Arranca el Service Worker de MSW (solo en modo `mock`)                                           |
+| [`contrato/ejemplos/`](../contrato/ejemplos/)          | Datos de partida (`salud`, `ajustes`) y eventos usados en las pruebas                            |
+
+- Arranca con dos perfiles (Ana y Pedro), el casco "conectado" y calibrado, y sesiones de ejemplo para el historial.
+- El **panel de pruebas** (`/dev`) dispara gestos, mueve la cabeza y simula mal contacto, igual que con el motor en `--demo`.
+- Desde la consola del navegador: `motorFalso.fallarConexion('SIN_CASCO', 'No se encontró el casco')` para probar los estados de error.
+- Las pruebas de pantallas usan el mismo motor falso sin red ([`src/pruebas/motorDePrueba.ts`](src/pruebas/motorDePrueba.ts)).
+- MSW **no llega al build de producción**: ni su código ni `mockServiceWorker.js`.
+
+`npm run capturas` (con `dev:mock` en marcha) guarda una captura de cada pantalla en `docs/img/interfaz/`.
