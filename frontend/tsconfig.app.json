@@ -27,5 +27,6 @@
       "@contrato/*": ["../contrato/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/*.nodo.test.ts"]
 }

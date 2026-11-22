@@ -87,3 +87,54 @@ Relación de contraste de cada color sobre las tres superficies (`--fondo` · `-
 | `--foco`        | anillo de foco (mín. 3:1)         | 17.2 · 13.8 · 11.0 | 16.5 · 16.5 · 13.4 |
 
 El texto sobre rellenos de color (`--sobre-accion`, `--sobre-activo`, `--sobre-estado`) tiene entre 7.9:1 y 16.5:1.
+
+## Conexión con el motor
+
+La interfaz solo conoce al motor a través del **contrato** ([`contrato/`](../contrato/)):
+
+| Pieza                                               | Qué hace                                                                                         |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [`src/api/generado/contrato.ts`](src/api/generado/) | Tipos TypeScript **generados** desde `contrato/openapi.json` y `contrato/ws/*.schema.json`       |
+| [`src/api/tipos.ts`](src/api/tipos.ts)              | Nombres cómodos para esos tipos (`Estado`, `Ajustes`, `Evento`…); no define ninguna forma a mano |
+| [`src/api/rest.ts`](src/api/rest.ts)                | Cliente REST (`api.perfiles.listar()`, `api.cambiarModo()`…); los fallos llegan como `ErrorApi`  |
+| [`src/api/eventos.ts`](src/api/eventos.ts)          | Cliente WebSocket: token, reconexión con espera creciente y manejo de `hola`                     |
+| [`src/api/config.ts`](src/api/config.ts)            | Dirección del motor y token (lo lee de `#token=…` en la URL, como lo entrega el motor)           |
+
+### Tipos generados
+
+```bash
+npm run tipos            # regenera src/api/generado/contrato.ts desde ../contrato
+npm run tipos:verificar  # falla si el archivo no coincide con el contrato (lo usa el CI)
+```
+
+Cuando cambie el contrato (por PR aprobado por los dos), basta con `npm run tipos`: TypeScript señala cada lugar de la interfaz que hay que adaptar. El archivo generado **no se edita a mano**.
+
+El generador marca como obligatorios los campos de todo lo que el motor **emite** (respuestas y eventos), porque el motor siempre los serializa completos; lo que la interfaz **envía** conserva sus campos opcionales.
+
+### Cliente WebSocket
+
+```ts
+const cliente = new ClienteEventos({ url: () => urlEventos(token) });
+cliente.en('gesto', (datos) => console.log(datos.gesto, datos.potencia)); // `datos` va tipado
+cliente.enEnlace((enlace) => console.log(enlace.estado)); // conectando · abierto · reconectando…
+cliente.conectar();
+```
+
+- Al conectar o reconectar llega `hola` con el estado completo: es siempre la fuente de verdad (los eventos perdidos no se reenvían).
+- Si la conexión se cae, reintenta sola a los 0.5 s, 1 s, 2 s, 4 s… hasta un máximo de 8 s entre intentos.
+- Si el motor rechaza el token deja de reintentar (`no_autorizado`): hay que abrir la interfaz desde el motor.
+- Ignora los mensajes mal formados y los tipos de evento que no conoce, como pide el contrato.
+
+Sus pruebas ([`src/api/eventos.nodo.test.ts`](src/api/eventos.nodo.test.ts)) levantan un **servidor WebSocket falso real** en un puerto local, que valida el token y saluda con `hola` igual que el motor.
+
+### Desarrollo contra el motor
+
+```bash
+# Terminal 1: motor con casco simulado, aceptando el origen de Vite
+cd backend && uv run python -m neuroacceso_motor --demo --dev --sin-raton
+
+# Terminal 2: interfaz
+cd frontend && npm run dev
+```
+
+El motor imprime su token al arrancar. Abre `http://localhost:5173/#token=EL_TOKEN`. La dirección del motor en desarrollo está en [`.env.development`](.env.development) (`VITE_MOTOR_URL`); en producción la interfaz y la API comparten origen.
