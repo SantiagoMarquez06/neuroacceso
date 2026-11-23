@@ -1,0 +1,91 @@
+.nota {
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-5);
+}
+
+.filtros > * {
+  flex: 0 1 18rem;
+}
+
+/* Gráficas pequeñas, una métrica cada una (nunca dos escalas en la misma). */
+.graficas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  gap: var(--esp-5);
+}
+
+.grafica {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  margin: 0;
+  padding: var(--esp-4);
+  border: var(--borde) solid var(--linea-suave);
+  border-radius: var(--radio);
+  background: var(--superficie);
+}
+
+.graficaTitulo {
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+}
+
+.lienzo {
+  height: 220px;
+}
+
+/* ---- Tabla de sesiones (la vista en tabla de las gráficas) -------------------------------- */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla th,
+.tabla td {
+  padding: var(--esp-2) var(--esp-3);
+  border-bottom: 1px solid var(--linea-suave);
+  text-align: left;
+}
+
+.tabla thead th {
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+  font-weight: var(--peso-medio);
+}
+
+.enlaceFila {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--objetivo);
+  font-weight: var(--peso-medio);
+}
+
+.volver {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--objetivo);
+  font-size: var(--t-medio);
+}
+
+.metricas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--esp-5);
+  margin: 0;
+}
+
+.metricas dt {
+  color: var(--texto-suave);
+}
+
+.metricas dd {
+  margin: 0;
+  font-size: var(--t-grande);
+  font-weight: var(--peso-fuerte);
+}
