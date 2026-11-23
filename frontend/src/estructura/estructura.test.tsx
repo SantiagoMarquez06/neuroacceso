@@ -142,10 +142,10 @@ describe('navegación', () => {
     expect(screen.getByRole('main')).toHaveAttribute('id', 'contenido');
   });
 
-  test('cada pantalla pone su nombre en el título de la ventana', () => {
+  test('cada pantalla pone su nombre en el título de la ventana', async () => {
     usarMotorFalso();
     renderizarApp('/ajustes');
-    expect(document.title).toBe('Ajustes · NeuroAcceso');
+    await waitFor(() => expect(document.title).toBe('Ajustes · NeuroAcceso'));
   });
 });
 
@@ -244,9 +244,10 @@ describe('estados globales', () => {
     expect(reintentar).toHaveBeenCalledOnce();
   });
 
-  test('si se pierde la conexión después de cargar, la pantalla sigue visible con un aviso', () => {
+  test('si se pierde la conexión después de cargar, la pantalla sigue visible con un aviso', async () => {
     usarMotorFalso();
     renderizarApp('/ajustes');
+    await screen.findByRole('heading', { name: 'Ajustes' });
 
     act(() => fijarEnlace({ estado: 'reconectando', intentos: 1, esperaMs: 500 }));
 

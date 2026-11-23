@@ -26,7 +26,7 @@ export function Dialogo({ abierto, titulo, onCerrar, acciones, children }: Props
     if (!abierto) return;
     const antes = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const primero = caja.current?.querySelector<HTMLElement>(
-      '[autofocus], input, select, textarea',
+      '[data-autofocus], input, select, textarea',
     );
     (primero ?? caja.current)?.focus();
     return () => antes?.focus();
