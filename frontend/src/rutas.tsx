@@ -3,6 +3,7 @@ import type { RouteObject } from 'react-router';
 import { Armazon } from './estructura/Armazon';
 import { ErrorDeRuta } from './estructura/ErrorDeRuta';
 import { Ajustes } from './pantallas/ajustes/Ajustes';
+import { BarraFlotante } from './pantallas/barra/BarraFlotante';
 import { Comunicador } from './pantallas/comunicador/Comunicador';
 import { PanelPruebas } from './pantallas/dev/PanelPruebas';
 import { EstadoCasco } from './pantallas/estado/EstadoCasco';
@@ -33,7 +34,7 @@ export const rutas: RouteObject[] = [
   // La barra flotante es una ventana aparte: no lleva la estructura común.
   {
     path: 'barra',
-    element: <EnConstruccion titulo="Barra flotante" />,
+    element: <BarraFlotante />,
     errorElement: <ErrorDeRuta />,
   },
 ];

@@ -1,0 +1,59 @@
+/* Ventana de ~640 × 72 px: todo en una fila, sin desplazamiento. */
+.barra {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-4);
+  height: 100vh;
+  min-height: 72px;
+  padding: 4px var(--esp-3) 4px var(--esp-4);
+  overflow: hidden;
+  border-left: 10px solid var(--apagado);
+  background: var(--superficie);
+  font-size: var(--t-base);
+}
+
+/* El borde izquierdo repite el color del estado: se ve de reojo, sin leer. */
+.barra[data-tono='bien'] {
+  border-left-color: var(--bien);
+}
+.barra[data-tono='aviso'] {
+  border-left-color: var(--aviso);
+}
+.barra[data-tono='mal'] {
+  border-left-color: var(--mal);
+}
+
+.modo {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.gesto {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--texto-suave);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bateria {
+  flex-shrink: 0;
+}
+
+.bateriaBaja {
+  flex-shrink: 0;
+  color: var(--mal);
+  font-weight: var(--peso-fuerte);
+}
+
+.botones {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--esp-3);
+}
+
+.botones button {
+  padding-inline: var(--esp-4);
+  font-size: var(--t-base);
+}
