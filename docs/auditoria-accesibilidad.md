@@ -3,19 +3,19 @@
 | | |
 |---|---|
 | **Fecha** | 23 de noviembre de 2026 |
-| **Alcance** | Las 11 pantallas de `docs/pantallas.md`, en tema oscuro y en alto contraste (22 combinaciones) |
+| **Alcance** | Las 11 pantallas de `docs/pantallas.md` y la encuesta SUS, en tema oscuro y en alto contraste (24 combinaciones) |
 | **Versión** | rama `interfaz/v1` |
 | **Issue** | #44 |
 | **Cómo repetirla** | `cd frontend && npm run dev:mock` y, en otra terminal, `npm run auditoria` |
 
 ## 1. Resultado
 
-**0 problemas** en las 22 combinaciones, tras corregir los 3 que encontró la primera pasada (24 avisos, porque dos se repetían en todas las pantallas).
+**0 problemas** en las 24 combinaciones, tras corregir los que encontraron las pasadas anteriores.
 
 | Comprobación | Criterio | Antes | Después |
 |---|---|---|---|
 | Reglas automáticas (axe-core 4.14) | WCAG 2.2 A y AA | 4 | 0 |
-| Tamaño de lo que se pulsa | ≥ 64 × 64 px (`docs/pantallas.md` §1.1) | 20 | 0 |
+| Tamaño de lo que se pulsa | ≥ 64 × 64 px (`docs/pantallas.md` §1.1) | 120 | 0 |
 | Foco de teclado visible | contorno ≥ 3 px en cada control al tabular | 0 | 0 |
 | Contraste de los colores del tema | 4,5:1 texto, 3:1 controles (WCAG 1.4.3 y 1.4.11) | 0 | 0 |
 
@@ -29,8 +29,9 @@ El contraste se comprueba además en cada `npm test`: `frontend/src/estilos/cont
 | 2 | Durante la calibración del asistente no quedaba nada enfocable en la pantalla (Repetir y Continuar desactivados) | Preparación | Con el teclado no había forma de salir del paso; axe: `scrollable-region-focusable` | "Saltar" funciona siempre; si la calibración está en curso, la cancela |
 | 3 | `aria-label` en un párrafo sin rol | Barra flotante | Atributo no permitido: los lectores de pantalla lo ignoran (axe: `aria-prohibited-attr`) | Texto oculto "Último gesto:" dentro del párrafo |
 | 4 | Con el texto "muy grande" (140 %), las filas del teclado del comunicador quedaban por debajo del borde de la ventana mientras el barrido las resaltaba | Comunicador | Quien usa el barrido no puede desplazar la página: elegiría a ciegas | Cada grupo resaltado se desplaza a la vista (`Resaltado`) |
+| 5 | Las opciones 1–5 de la encuesta SUS medían 58–60 px por dentro del borde | Encuesta SUS | El control real (el círculo oculto) quedaba por debajo de 64 px | Cada opción mide 64 px por dentro del borde |
 
-El problema 4 no lo detecta ninguna herramienta automática: salió de la revisión manual del punto 4.
+El problema 4 no lo detecta ninguna herramienta automática: salió de la revisión manual (apartado 3.3).
 
 ## 3. Método
 
