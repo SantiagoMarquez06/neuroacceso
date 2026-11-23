@@ -203,8 +203,15 @@ function PasoCalibracion({ alListo }: PropsPaso) {
         >
           Repetir
         </BotonGrande>
-        <BotonGrande icono="siguiente" disabled={enCurso || !calibrado} onClick={alListo}>
-          {calibrado ? 'Continuar' : 'Saltar'}
+        <BotonGrande
+          icono="siguiente"
+          onClick={() => {
+            // Saltar a mitad cancela la calibración en curso (el motor vuelve a su modo).
+            if (enCurso) api.cancelarCalibracion().catch(avisarError);
+            alListo();
+          }}
+        >
+          {calibrado && !enCurso ? 'Continuar' : 'Saltar'}
         </BotonGrande>
       </div>
     </div>

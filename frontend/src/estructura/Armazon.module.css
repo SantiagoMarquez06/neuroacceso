@@ -11,6 +11,9 @@
   top: var(--esp-2);
   left: var(--esp-2);
   z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--objetivo);
   padding: var(--esp-3) var(--esp-4);
   border-radius: var(--radio-chico);
   background: var(--accion);

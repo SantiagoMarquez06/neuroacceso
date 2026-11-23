@@ -18,5 +18,5 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": ["vite.config.ts", "scripts", "src/**/*.nodo.test.ts"]
+  "include": ["vite.config.ts", "scripts/generar-tipos.mjs", "src/**/*.nodo.test.ts"]
 }

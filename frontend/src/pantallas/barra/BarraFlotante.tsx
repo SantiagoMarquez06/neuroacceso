@@ -90,7 +90,8 @@ export function BarraFlotante() {
           {resumen.texto}
         </IndicadorEstado>
       </p>
-      <p className={estilos.gesto} aria-live="polite" aria-label="Último gesto">
+      <p className={estilos.gesto} aria-live="polite" data-ultimo-gesto>
+        {textoGesto && <span className="solo-lectores">Último gesto: </span>}
         {textoGesto}
       </p>
       {bateria !== null && (

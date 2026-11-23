@@ -52,10 +52,12 @@ describe('barra flotante', () => {
     renderizarApp('/barra');
 
     act(() => motor.simularGesto('clench'));
-    expect(screen.getByLabelText('Último gesto')).toHaveTextContent('Apretar la mandíbula → Clic');
+    expect(document.querySelector('[data-ultimo-gesto]')).toHaveTextContent(
+      'Apretar la mandíbula → Clic',
+    );
 
     act(() => void vi.advanceTimersByTime(3500));
-    expect(screen.getByLabelText('Último gesto')).toHaveTextContent('');
+    expect(document.querySelector('[data-ultimo-gesto]')).toHaveTextContent('');
   });
 
   test('avisos críticos: mal contacto, sin casco, sin conexión', () => {

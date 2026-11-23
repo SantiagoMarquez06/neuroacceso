@@ -20,6 +20,7 @@ if (!TOKEN) {
   process.exit(2);
 }
 
+/** @type {string[]} */
 const errores = [];
 let pasos = 0;
 const paso = async (nombre, accion) => {
@@ -116,6 +117,7 @@ try {
       const area = pagina.getByRole('application', { name: 'Área de la práctica' });
       for (let i = 0; i < 10; i += 1) {
         const caja = await area.locator('[data-activo]').boundingBox();
+        if (!caja) throw new Error('No se ve el objetivo activo');
         const dx = i % 2 ? 4 : -4;
         await pagina.mouse.click(caja.x + caja.width / 2 + dx, caja.y + caja.height / 2);
         await pagina.waitForTimeout(120);
