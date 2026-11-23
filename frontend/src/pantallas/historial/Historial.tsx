@@ -2,7 +2,8 @@
 // el terapeuta y el informe del proyecto.
 import { useState } from 'react';
 import { Link, useParams } from 'react-router';
-import { usePerfilActivo, useSesion, useSesiones } from '../../api/consultas';
+import { usePerfilActivo, usePerfiles, useSesion, useSesiones } from '../../api/consultas';
+import { useMotor } from '../../estado/motor';
 import { api } from '../../api/rest';
 import type { Sesion, TipoSesion } from '../../api/tipos';
 import { BotonGrande, Cargando, ErrorPantalla, Selector, Tarjeta, Vacio } from '../../componentes';
@@ -44,6 +45,8 @@ function serie(
 
 export function Historial() {
   const perfil = usePerfilActivo();
+  const perfiles = usePerfiles();
+  const activoId = useMotor((s) => s.estado?.perfil_activo_id);
   const [periodo, setPeriodo] = useState('30');
   const [tipo, setTipo] = useState<FiltroTipo>('todas');
   // El "desde" se fija al elegir el período: así la consulta no cambia en cada dibujo.
@@ -51,6 +54,9 @@ export function Historial() {
   const sesiones = useSesiones({ perfil_id: perfil?.id, desde }, perfil !== undefined);
   const [exportando, setExportando] = useState(false);
 
+  if (!perfil && activoId && perfiles.isPending) {
+    return <Cargando texto="Cargando el perfil…" />;
+  }
   if (!perfil) {
     return (
       <Pantalla titulo="Historial">
