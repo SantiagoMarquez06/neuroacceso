@@ -3,8 +3,10 @@ import type { EvOrientacion } from '../api/tipos';
 import { orientacion, posicionPunto } from '../estado/orientacion';
 import estilos from './IndicadorOrientacion.module.css';
 
-const conSigno = (grados: number) =>
-  `${grados > 0 ? '+' : grados < 0 ? '−' : ''}${Math.abs(Math.round(grados))}°`;
+const conSigno = (grados: number) => {
+  const r = Math.round(grados); // el signo va sobre el valor redondeado: nada de "−0°"
+  return `${r > 0 ? '+' : r < 0 ? '−' : ''}${Math.abs(r)}°`;
+};
 
 /**
  * Hacia dónde apunta la cabeza. Se actualiza hasta 20 veces por segundo escribiendo

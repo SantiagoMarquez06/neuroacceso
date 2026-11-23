@@ -18,6 +18,15 @@ export function recibir(evento: Evento): void {
   if (evento.tipo === 'orientacion') orientacion.fijar(evento.datos);
   else aplicarEvento(evento);
   for (const oyente of oyentes.get(evento.tipo) ?? []) oyente(evento.datos);
+  for (const oyente of oyentesDeTodo) oyente(evento);
+}
+
+const oyentesDeTodo = new Set<(evento: Evento) => void>();
+
+/** Escucha todos los eventos tal como llegan (para el visor del panel de pruebas). */
+export function escucharTodo(oyente: (evento: Evento) => void): () => void {
+  oyentesDeTodo.add(oyente);
+  return () => oyentesDeTodo.delete(oyente);
 }
 
 /** Escucha un tipo de evento fuera de React. Devuelve la función para dejar de escuchar. */

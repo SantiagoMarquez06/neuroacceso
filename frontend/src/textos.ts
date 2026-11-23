@@ -10,6 +10,7 @@ import type {
   Sensor,
   TipoSesion,
 } from './api/tipos';
+import { SENSORES } from './api/tipos';
 
 // ---- Gestos --------------------------------------------------------------------------------
 const GESTOS: Record<string, { nombre: string; orden: string }> = {
@@ -182,12 +183,10 @@ export function nivelContacto(valor: number | undefined): NivelContacto {
 /** Zonas de la cabeza que hay que revisar, en palabras ("sobre la oreja izquierda"). */
 export function zonasPorRevisar(contacto: Record<string, number> | null): string[] {
   if (!contacto) return [];
-  return (Object.keys(ZONA_SENSOR) as Sensor[])
-    .filter((sensor) => {
-      const nivel = nivelContacto(contacto[sensor]);
-      return nivel === 'malo' || nivel === 'sin_senal';
-    })
-    .map((sensor) => ZONA_SENSOR[sensor]);
+  return SENSORES.filter((sensor) => {
+    const nivel = nivelContacto(contacto[sensor]);
+    return nivel === 'malo' || nivel === 'sin_senal';
+  }).map((sensor) => ZONA_SENSOR[sensor]);
 }
 
 export const NOMBRE_CONTACTO: Record<NivelContacto, string> = {

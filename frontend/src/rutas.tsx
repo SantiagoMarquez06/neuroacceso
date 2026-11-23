@@ -2,6 +2,7 @@
 import type { RouteObject } from 'react-router';
 import { Armazon } from './estructura/Armazon';
 import { ErrorDeRuta } from './estructura/ErrorDeRuta';
+import { EstadoCasco } from './pantallas/estado/EstadoCasco';
 import { EnConstruccion, NoEncontrada } from './pantallas/Provisional';
 
 export const rutas: RouteObject[] = [
@@ -11,7 +12,7 @@ export const rutas: RouteObject[] = [
     children: [
       { index: true, element: <EnConstruccion titulo="Elegir perfil" /> },
       { path: 'preparacion', element: <EnConstruccion titulo="Preparación" /> },
-      { path: 'estado', element: <EnConstruccion titulo="Estado del casco" /> },
+      { path: 'estado', element: <EstadoCasco /> },
       { path: 'comunicador', element: <EnConstruccion titulo="Comunicador" /> },
       { path: 'practica', element: <EnConstruccion titulo="Práctica de puntería" /> },
       { path: 'entrenamiento', element: <EnConstruccion titulo="Entrenamiento" /> },
