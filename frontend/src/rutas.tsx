@@ -2,6 +2,7 @@
 import type { RouteObject } from 'react-router';
 import { Armazon } from './estructura/Armazon';
 import { ErrorDeRuta } from './estructura/ErrorDeRuta';
+import { PanelPruebas } from './pantallas/dev/PanelPruebas';
 import { EstadoCasco } from './pantallas/estado/EstadoCasco';
 import { EnConstruccion, NoEncontrada } from './pantallas/Provisional';
 
@@ -20,7 +21,7 @@ export const rutas: RouteObject[] = [
       { path: 'perfiles', element: <EnConstruccion titulo="Perfiles" /> },
       { path: 'historial', element: <EnConstruccion titulo="Historial" /> },
       { path: 'historial/:sesionId', element: <EnConstruccion titulo="Detalle de la sesión" /> },
-      { path: 'dev', element: <EnConstruccion titulo="Panel de pruebas" /> },
+      { path: 'dev', element: <PanelPruebas /> },
       { path: '*', element: <NoEncontrada /> },
     ],
   },
