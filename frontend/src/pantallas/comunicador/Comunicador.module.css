@@ -1,0 +1,78 @@
+.comunicador {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* El texto escrito, en grande: es lo que la persona quiere decir. */
+.texto {
+  display: block;
+  min-height: calc(var(--t-titular) * 1.6);
+  padding: var(--esp-3) var(--esp-5);
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--fondo);
+  font-size: var(--t-titular);
+  font-weight: var(--peso-fuerte);
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.cursorTexto {
+  display: inline-block;
+  width: 0.08em;
+  height: 1em;
+  margin-left: 0.04em;
+  vertical-align: -0.12em;
+  background: var(--accion);
+  animation: parpadeo 1.1s steps(1) infinite;
+}
+
+@keyframes parpadeo {
+  50% {
+    opacity: 0;
+  }
+}
+
+.fila,
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--separacion);
+}
+
+.prediccion {
+  min-height: calc(var(--objetivo) + 2 * var(--esp-2) + 2 * var(--borde-fuerte));
+}
+
+.sinSugerencias {
+  align-self: center;
+  padding: 0 var(--esp-3);
+  color: var(--texto-suave);
+}
+
+.teclado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.filaTeclas {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--separacion);
+}
+
+.tecla {
+  width: 100%;
+  font-size: var(--t-enorme);
+}
+
+.controles > * {
+  flex: 1 1 9rem;
+}
