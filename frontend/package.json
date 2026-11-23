@@ -21,7 +21,8 @@
     "test:watch": "vitest",
     "tipos": "node scripts/generar-tipos.mjs",
     "tipos:verificar": "node scripts/generar-tipos.mjs --verificar",
-    "capturas": "node scripts/capturas.mjs"
+    "capturas": "node scripts/capturas.mjs",
+    "humo": "node scripts/humo-motor.mjs"
   },
   "dependencies": {
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",

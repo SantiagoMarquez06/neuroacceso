@@ -161,3 +161,14 @@ La interfaz arranca completa contra un **motor simulado en el navegador**. No ha
 - MSW **no llega al build de producción**: ni su código ni `mockServiceWorker.js`.
 
 `npm run capturas` (con `dev:mock` en marcha) guarda una captura de cada pantalla en `docs/img/interfaz/`.
+
+## Prueba de humo contra el motor real
+
+Recorre la interfaz **servida por el motor** (como en el ejecutable) con el casco simulado: perfil, estado, gestos, comunicador, práctica, ajustes, historial y barra flotante. Sirve para los puntos de integración.
+
+```bash
+cd frontend && npm run build
+cd ../backend && uv run python -m neuroacceso_motor --demo --sin-raton --datos prueba.db
+# en otra terminal, con el token que imprime el motor:
+cd frontend && npm run humo -- --token EL_TOKEN        # añade --ver para mirar la ventana
+```
