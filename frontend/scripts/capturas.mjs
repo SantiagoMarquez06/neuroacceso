@@ -31,6 +31,20 @@ const PANTALLAS = [
   { nombre: '03-preparacion', ruta: '/preparacion' },
   { nombre: '04-comunicador', ruta: '/comunicador' },
   { nombre: '05-practica', ruta: '/practica' },
+  {
+    nombre: '05b-practica-en-curso',
+    ruta: '/practica',
+    antes: async (pagina) => {
+      await pagina.getByRole('button', { name: 'Iniciar' }).click();
+      await pagina.waitForTimeout(300);
+      const area = pagina.getByRole('application', { name: 'Área de la práctica' });
+      // Dos clics sobre el objetivo activo: la salida y el primer intento.
+      for (let i = 0; i < 2; i += 1) {
+        const caja = await area.locator('[data-activo]').boundingBox();
+        if (caja) await pagina.mouse.click(caja.x + caja.width / 2, caja.y + caja.height / 2);
+      }
+    },
+  },
   { nombre: '06-entrenamiento', ruta: '/entrenamiento' },
   { nombre: '07-ajustes', ruta: '/ajustes' },
   { nombre: '08-perfiles', ruta: '/perfiles' },

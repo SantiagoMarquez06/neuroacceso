@@ -9,6 +9,7 @@ import { PanelPruebas } from './pantallas/dev/PanelPruebas';
 import { EstadoCasco } from './pantallas/estado/EstadoCasco';
 import { ElegirPerfil } from './pantallas/perfiles/ElegirPerfil';
 import { Perfiles } from './pantallas/perfiles/Perfiles';
+import { Practica } from './pantallas/practica/Practica';
 import { Preparacion } from './pantallas/preparacion/Preparacion';
 import { EnConstruccion, NoEncontrada } from './pantallas/Provisional';
 
@@ -21,7 +22,7 @@ export const rutas: RouteObject[] = [
       { path: 'preparacion', element: <Preparacion /> },
       { path: 'estado', element: <EstadoCasco /> },
       { path: 'comunicador', element: <Comunicador /> },
-      { path: 'practica', element: <EnConstruccion titulo="Práctica de puntería" /> },
+      { path: 'practica', element: <Practica /> },
       { path: 'entrenamiento', element: <EnConstruccion titulo="Entrenamiento" /> },
       { path: 'ajustes', element: <Ajustes /> },
       { path: 'perfiles', element: <Perfiles /> },

@@ -1,0 +1,81 @@
+/* Área de la tarea: ocupa todo el alto disponible y no tiene nada más que los objetivos. */
+.area {
+  position: relative;
+  flex: 1;
+  min-height: 520px;
+  border: var(--borde) solid var(--linea-suave);
+  border-radius: var(--radio);
+  background: var(--fondo);
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+}
+
+.area[hidden] {
+  display: none;
+}
+
+.marcador {
+  position: absolute;
+  top: var(--esp-3);
+  left: var(--esp-4);
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+  pointer-events: none;
+}
+
+.objetivo,
+.objetivoActivo {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none; /* el clic se mide en el área, no en el objetivo */
+}
+
+.objetivo {
+  border: var(--borde) solid var(--linea-suave);
+}
+
+/* El objetivo activo se distingue por relleno y por un anillo, no solo por el color. */
+.objetivoActivo {
+  background: var(--activo);
+  box-shadow:
+    0 0 0 4px var(--fondo),
+    0 0 0 8px var(--activo);
+}
+
+/* ---- Resultados --------------------------------------------------------------------------- */
+.metricas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--esp-5);
+  margin: 0;
+}
+
+.metrica {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  padding: var(--esp-4);
+  border: var(--borde) solid var(--linea-suave);
+  border-radius: var(--radio);
+}
+
+.metrica dt {
+  color: var(--texto-suave);
+  font-weight: var(--peso-medio);
+}
+
+.metrica dd {
+  margin: 0;
+}
+
+.valor {
+  font-size: var(--t-enorme);
+  font-weight: var(--peso-fuerte);
+  line-height: 1.1;
+}
+
+.ayuda {
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+}
