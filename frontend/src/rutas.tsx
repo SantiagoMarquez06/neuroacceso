@@ -6,6 +6,7 @@ import { Ajustes } from './pantallas/ajustes/Ajustes';
 import { BarraFlotante } from './pantallas/barra/BarraFlotante';
 import { Comunicador } from './pantallas/comunicador/Comunicador';
 import { PanelPruebas } from './pantallas/dev/PanelPruebas';
+import { Entrenamiento } from './pantallas/entrenamiento/Entrenamiento';
 import { EstadoCasco } from './pantallas/estado/EstadoCasco';
 import { ElegirPerfil } from './pantallas/perfiles/ElegirPerfil';
 import { Perfiles } from './pantallas/perfiles/Perfiles';
@@ -23,7 +24,7 @@ export const rutas: RouteObject[] = [
       { path: 'estado', element: <EstadoCasco /> },
       { path: 'comunicador', element: <Comunicador /> },
       { path: 'practica', element: <Practica /> },
-      { path: 'entrenamiento', element: <EnConstruccion titulo="Entrenamiento" /> },
+      { path: 'entrenamiento', element: <Entrenamiento /> },
       { path: 'ajustes', element: <Ajustes /> },
       { path: 'perfiles', element: <Perfiles /> },
       { path: 'historial', element: <EnConstruccion titulo="Historial" /> },
