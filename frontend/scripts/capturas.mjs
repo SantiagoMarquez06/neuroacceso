@@ -50,6 +50,7 @@ const PANTALLAS = [
   { nombre: '08-perfiles', ruta: '/perfiles' },
   { nombre: '09-historial', ruta: '/historial' },
   { nombre: '10-pruebas', ruta: '/dev' },
+  { nombre: '13-encuesta-sus', ruta: '/encuesta' },
   { nombre: '11-barra', ruta: '/barra', ancho: 640, alto: 72 },
   {
     nombre: '12-alto-contraste',

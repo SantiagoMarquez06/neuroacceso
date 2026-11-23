@@ -27,6 +27,7 @@ const PANTALLAS = [
   ['Ajustes', '/ajustes'],
   ['Perfiles', '/perfiles'],
   ['Historial', '/historial'],
+  ['Encuesta SUS', '/encuesta'],
   ['Panel de pruebas', '/dev'],
   ['Barra flotante', '/barra'],
 ];

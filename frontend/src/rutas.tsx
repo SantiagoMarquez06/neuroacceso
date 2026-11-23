@@ -6,6 +6,7 @@ import { Ajustes } from './pantallas/ajustes/Ajustes';
 import { BarraFlotante } from './pantallas/barra/BarraFlotante';
 import { Comunicador } from './pantallas/comunicador/Comunicador';
 import { PanelPruebas } from './pantallas/dev/PanelPruebas';
+import { Encuesta } from './pantallas/encuesta/Encuesta';
 import { Entrenamiento } from './pantallas/entrenamiento/Entrenamiento';
 import { EstadoCasco } from './pantallas/estado/EstadoCasco';
 import { DetalleSesion, Historial } from './pantallas/historial/Historial';
@@ -30,6 +31,7 @@ export const rutas: RouteObject[] = [
       { path: 'perfiles', element: <Perfiles /> },
       { path: 'historial', element: <Historial /> },
       { path: 'historial/:sesionId', element: <DetalleSesion /> },
+      { path: 'encuesta', element: <Encuesta /> },
       { path: 'dev', element: <PanelPruebas /> },
       { path: '*', element: <NoEncontrada /> },
     ],

@@ -7,6 +7,31 @@ Lo que **ve y usa la persona**: una aplicación React + TypeScript + Vite que ha
 - Arquitectura: [docs/arquitectura-sistema.md](../docs/arquitectura-sistema.md)
 - Tareas: issues con la etiqueta `parte-B-interfaz`
 
+## Pantallas
+
+| Ruta                           | Pantalla                                                           | Para quién  | Issue       |
+| ------------------------------ | ------------------------------------------------------------------ | ----------- | ----------- |
+| `/`                            | Elegir perfil                                                      | acompañante | #28         |
+| `/preparacion`                 | Asistente: conexión → contacto → calibración → prueba de gestos    | los dos     | #27         |
+| `/estado`                      | Estado del casco: 14 sensores, orientación, último gesto, registro | los dos     | #18         |
+| `/comunicador`                 | Escribir y hablar con barrido, predicción y frases rápidas         | usuario     | #29 #30 #39 |
+| `/practica`                    | Práctica de puntería ISO 9241-411 con métricas                     | usuario     | #38         |
+| `/entrenamiento`               | Entrenar gestos y comando mental                                   | los dos     | #37         |
+| `/ajustes`                     | Cursor, gestos, clic quieto, comunicador, voz, apariencia          | acompañante | #28         |
+| `/perfiles`                    | Crear, renombrar, activar y eliminar perfiles                      | acompañante | #28         |
+| `/historial`, `/historial/:id` | Evolución con gráficas, exportar CSV                               | acompañante | #43         |
+| `/encuesta`                    | Cuestionario SUS para las pruebas con usuarios                     | acompañante | #48         |
+| `/barra`                       | Barra flotante (ventana pequeña siempre visible)                   | usuario     | #31         |
+| `/dev`                         | Panel de pruebas sin casco (solo en `--demo`)                      | equipo      | #19         |
+
+Capturas de todas en [docs/img/interfaz/](../docs/img/interfaz/) (`npm run capturas`). Auditoría de accesibilidad: [docs/auditoria-accesibilidad.md](../docs/auditoria-accesibilidad.md) (`npm run auditoria`).
+
+| Estado del casco                                            | Comunicador                                             |
+| ----------------------------------------------------------- | ------------------------------------------------------- |
+| ![Estado del casco](../docs/img/interfaz/01-estado.png)     | ![Comunicador](../docs/img/interfaz/04-comunicador.png) |
+| **Práctica de puntería**                                    | **Historial**                                           |
+| ![Práctica](../docs/img/interfaz/05b-practica-en-curso.png) | ![Historial](../docs/img/interfaz/09-historial.png)     |
+
 ## Requisitos
 
 - Node.js 22.12 o superior (se desarrolla con Node 24) y npm.

@@ -95,9 +95,14 @@ export function Historial() {
     <Pantalla
       titulo={`Historial de ${perfil.nombre}`}
       acciones={
-        <BotonGrande icono="descargar" disabled={exportando} onClick={() => void exportar()}>
-          Exportar CSV
-        </BotonGrande>
+        <>
+          <Link to="/encuesta" className={estilos.volver}>
+            Encuesta de usabilidad (SUS)
+          </Link>
+          <BotonGrande icono="descargar" disabled={exportando} onClick={() => void exportar()}>
+            Exportar CSV
+          </BotonGrande>
+        </>
       }
     >
       <div className={estilos.filtros}>
