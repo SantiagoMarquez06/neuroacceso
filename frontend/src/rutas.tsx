@@ -8,6 +8,7 @@ import { PanelPruebas } from './pantallas/dev/PanelPruebas';
 import { EstadoCasco } from './pantallas/estado/EstadoCasco';
 import { ElegirPerfil } from './pantallas/perfiles/ElegirPerfil';
 import { Perfiles } from './pantallas/perfiles/Perfiles';
+import { Preparacion } from './pantallas/preparacion/Preparacion';
 import { EnConstruccion, NoEncontrada } from './pantallas/Provisional';
 
 export const rutas: RouteObject[] = [
@@ -16,7 +17,7 @@ export const rutas: RouteObject[] = [
     errorElement: <ErrorDeRuta />,
     children: [
       { index: true, element: <ElegirPerfil /> },
-      { path: 'preparacion', element: <EnConstruccion titulo="Preparación" /> },
+      { path: 'preparacion', element: <Preparacion /> },
       { path: 'estado', element: <EstadoCasco /> },
       { path: 'comunicador', element: <Comunicador /> },
       { path: 'practica', element: <EnConstruccion titulo="Práctica de puntería" /> },

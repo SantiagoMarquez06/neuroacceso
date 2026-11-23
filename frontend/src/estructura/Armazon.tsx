@@ -51,7 +51,9 @@ export function Armazon() {
   // El modo lo decide el motor. Si pasa a comunicador (gesto de rescate, o el botón "Hablar" de
   // la barra flotante), esta ventana abre el comunicador; si el gesto de rescate lo saca de él,
   // vuelve al panel principal. Así el usuario nunca queda atrapado en una pantalla.
+  // (En la preparación no: allí el gesto de rescate solo se está probando.)
   useEvento('modo', ({ modo, motivo }) => {
+    if (pathname === '/preparacion') return;
     if (modo === 'comunicador' && pathname !== '/comunicador') {
       navegar('/comunicador');
     } else if (
