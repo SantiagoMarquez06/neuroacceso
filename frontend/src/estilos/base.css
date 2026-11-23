@@ -1,0 +1,108 @@
+/* Estilos globales mínimos. Los componentes llevan los suyos en archivos *.module.css. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Todo el texto usa rem: cambiar --escala agranda la interfaz entera. */
+  font-size: calc(100% * var(--escala));
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-size: var(--t-base);
+  font-weight: var(--peso-normal);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+#raiz {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--t-enorme);
+  font-weight: var(--peso-fuerte);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: var(--t-grande);
+  font-weight: var(--peso-fuerte);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+  line-height: 1.25;
+}
+
+a {
+  color: var(--accion);
+  text-underline-offset: 0.2em;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Foco siempre visible y grueso: quien acompaña usa el teclado y debe ver dónde está. */
+:focus-visible {
+  outline: var(--ancho-foco) solid var(--foco);
+  outline-offset: 3px;
+  border-radius: var(--radio-chico);
+}
+
+/* Visible solo para lectores de pantalla. */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Los números que cambian en vivo no deben "bailar". */
+.numeros {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

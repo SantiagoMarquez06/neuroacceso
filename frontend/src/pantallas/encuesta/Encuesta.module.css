@@ -1,0 +1,84 @@
+.nota {
+  color: var(--texto-suave);
+}
+
+.preguntas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pregunta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  margin: 0;
+  padding: var(--esp-4);
+  border: var(--borde) solid var(--linea-suave);
+  border-radius: var(--radio);
+}
+
+.pregunta legend {
+  padding: 0;
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+}
+
+.numero {
+  color: var(--texto-suave);
+}
+
+.escala {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(var(--objetivo), 1fr));
+  gap: var(--separacion);
+}
+
+/* Cada opción es un objetivo grande; el círculo nativo queda oculto pero sigue siendo el control. */
+.opcion {
+  position: relative;
+  display: grid;
+  place-items: center;
+  /* El control real es el círculo oculto que cubre el interior: ese interior mide ≥ 64 px. */
+  min-height: calc(var(--objetivo) + 2 * var(--borde));
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  cursor: pointer;
+}
+
+.opcion input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.valor {
+  font-size: var(--t-grande);
+  font-weight: var(--peso-fuerte);
+}
+
+.opcion:has(input:checked) {
+  border-color: var(--accion);
+  background: var(--accion);
+  color: var(--sobre-accion);
+}
+
+.opcion:has(input:focus-visible) {
+  outline: var(--ancho-foco) solid var(--foco);
+  outline-offset: 3px;
+}
+
+.puntuacion {
+  font-size: var(--t-grande);
+}
+
+.puntuacion span {
+  font-size: var(--t-titular);
+  font-weight: var(--peso-fuerte);
+}

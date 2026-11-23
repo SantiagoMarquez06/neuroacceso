@@ -1,0 +1,113 @@
+.nota {
+  max-width: 62ch;
+  color: var(--texto-suave);
+}
+
+.guardado {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--objetivo);
+}
+
+.vistaPrevia {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-5);
+  padding: var(--esp-4);
+  border: var(--borde) solid var(--linea-suave);
+  border-radius: var(--radio);
+}
+
+.vistaPrevia > p {
+  flex: 1 1 18rem;
+}
+
+/* ---- Tabla de gestos ---------------------------------------------------------------------- */
+.tabla {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 var(--esp-2);
+}
+
+.tabla caption {
+  margin-bottom: var(--esp-2);
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+  text-align: left;
+}
+
+.tabla th,
+.tabla td {
+  padding: 0 var(--esp-2);
+  text-align: left;
+}
+
+.tabla thead th {
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+  font-weight: var(--peso-medio);
+}
+
+.tabla tbody th {
+  font-weight: var(--peso-medio);
+}
+
+.select {
+  width: 100%;
+  min-height: var(--objetivo);
+  padding: var(--esp-2) var(--esp-3);
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font-size: var(--t-base);
+}
+
+.select:disabled {
+  opacity: 0.6;
+}
+
+/* ---- Frases rápidas ----------------------------------------------------------------------- */
+.frases {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  margin: 0;
+  padding: var(--esp-4);
+  border: var(--borde) solid var(--linea-suave);
+  border-radius: var(--radio);
+}
+
+.frases legend {
+  padding: 0 var(--esp-2);
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+}
+
+.listaFrases {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listaFrases li,
+.nuevaFrase {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--separacion);
+}
+
+.listaFrases li > :first-child,
+.nuevaFrase > :first-child {
+  flex: 1 1 16rem;
+}
+
+.botonesFrase {
+  display: flex;
+  gap: var(--esp-3);
+}

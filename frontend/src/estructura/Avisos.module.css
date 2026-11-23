@@ -1,0 +1,30 @@
+.globales {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.breves {
+  position: fixed;
+  top: var(--esp-4);
+  right: var(--esp-4);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  width: min(34rem, calc(100vw - 2 * var(--esp-4)));
+}
+
+.enlace {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--objetivo);
+  padding: 0 var(--esp-5);
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font-size: var(--t-medio);
+  font-weight: var(--peso-medio);
+  text-decoration: none;
+}

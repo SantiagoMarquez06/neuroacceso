@@ -1,0 +1,35 @@
+.pantalla {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ancho {
+  max-width: 1400px;
+}
+
+.lectura {
+  max-width: 880px;
+}
+
+.cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--separacion);
+}
+
+.descripcion {
+  max-width: 64ch;
+  margin-top: var(--esp-2);
+  color: var(--texto-suave);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--separacion);
+}

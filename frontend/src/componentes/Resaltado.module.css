@@ -1,0 +1,20 @@
+.marco {
+  padding: var(--esp-2);
+  border: var(--borde-fuerte) solid transparent;
+  border-radius: calc(var(--radio) + var(--esp-2));
+  transition:
+    border-color var(--transicion),
+    background-color var(--transicion);
+}
+
+/* El barrido pasa por este grupo: marco azul grueso y fondo más claro. */
+.grupo {
+  border-color: var(--accion);
+  background: var(--superficie-2);
+}
+
+/* Se entró en el grupo: el marco pasa a discontinuo y el protagonismo es del elemento activo. */
+.activo {
+  border-style: dashed;
+  border-color: var(--accion);
+}

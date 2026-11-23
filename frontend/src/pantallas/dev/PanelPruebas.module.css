@@ -1,0 +1,48 @@
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  align-items: start;
+  gap: var(--esp-5);
+}
+
+.gestos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--separacion);
+}
+
+.pad {
+  display: grid;
+  grid-template-columns: repeat(3, var(--objetivo-grande));
+  gap: var(--separacion);
+  justify-content: center;
+}
+
+.visor {
+  grid-column: 1 / -1;
+}
+
+.nota {
+  color: var(--texto-suave);
+}
+
+.crudos {
+  max-height: 320px;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.crudos li + li {
+  border-top: 1px solid var(--linea-suave);
+}
+
+.crudos pre {
+  margin: 0;
+  padding: var(--esp-2) 0;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

@@ -1,0 +1,44 @@
+.lista {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.lista li {
+  display: grid;
+  grid-template-columns: 5.2em 1fr;
+  gap: var(--esp-3);
+  padding: var(--esp-2) var(--esp-3);
+  border-left: var(--borde-fuerte) solid var(--linea-suave);
+}
+
+.lista li + li {
+  margin-top: var(--esp-1);
+}
+
+.lista time {
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+  line-height: 1.8;
+}
+
+/* El tono se marca en el borde; el texto conserva el color normal para leerse bien. */
+.bien {
+  border-left-color: var(--bien) !important;
+}
+
+.aviso {
+  border-left-color: var(--aviso) !important;
+}
+
+.mal {
+  border-left-color: var(--mal) !important;
+}
+
+.vacio {
+  color: var(--texto-suave);
+}

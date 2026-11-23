@@ -1,0 +1,99 @@
+.rejilla {
+  display: grid;
+  grid-template-columns: minmax(300px, 5fr) minmax(0, 7fr);
+  align-items: start;
+  gap: var(--esp-5);
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  min-width: 0;
+}
+
+.nota {
+  max-width: 60ch;
+  color: var(--texto-suave);
+}
+
+/* ---- Contacto ---------------------------------------------------------------------------- */
+.contacto {
+  align-items: stretch;
+}
+
+.global {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-5);
+  padding-top: var(--esp-4);
+  border-top: var(--borde) solid var(--linea-suave);
+}
+
+.globalTitulo {
+  font-size: var(--t-medio);
+  font-weight: var(--peso-fuerte);
+}
+
+/* ---- Último gesto ------------------------------------------------------------------------ */
+.gesto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.gestoNombre {
+  font-size: var(--t-enorme);
+  font-weight: var(--peso-fuerte);
+  line-height: 1.1;
+}
+
+.gestoAccion {
+  color: var(--texto-suave);
+  font-size: var(--t-medio);
+}
+
+.potencia {
+  display: grid;
+  grid-template-columns: auto minmax(0, 16rem);
+  align-items: center;
+  gap: var(--esp-3);
+  margin-top: var(--esp-2);
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+}
+
+/* ---- Cursor ------------------------------------------------------------------------------ */
+.cursor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--esp-5);
+}
+
+.cursorEstado {
+  display: flex;
+  flex: 1 1 18rem;
+  flex-direction: column;
+  gap: var(--esp-4);
+}
+
+.calibrando {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  font-size: var(--t-medio);
+}
+
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--separacion);
+}
+
+@media (max-width: 1100px) {
+  .rejilla {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

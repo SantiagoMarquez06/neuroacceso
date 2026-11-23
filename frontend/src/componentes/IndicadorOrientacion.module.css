@@ -1,0 +1,45 @@
+.orientacion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-2);
+}
+
+.recuadro {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  border: var(--borde) solid var(--linea);
+  border-radius: var(--radio);
+  /* Cruz central: el "centro" que se fija al calibrar. */
+  background:
+    linear-gradient(var(--linea-suave), var(--linea-suave)) center / 2px 100% no-repeat,
+    linear-gradient(var(--linea-suave), var(--linea-suave)) center / 100% 2px no-repeat,
+    var(--superficie-2);
+}
+
+/* La pista ocupa todo el recuadro: moverla un 50 % lleva el punto justo al borde. */
+.pista {
+  position: absolute;
+  inset: 11px;
+  display: grid;
+  place-items: center;
+  transition: transform 60ms linear;
+}
+
+.punto {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accion);
+}
+
+.pista[data-calibrado='false'] .punto {
+  border: 3px dashed var(--apagado);
+  background: transparent;
+}
+
+.texto {
+  color: var(--texto-suave);
+  font-size: var(--t-chico);
+}

@@ -75,7 +75,7 @@ Todo lo que **ve y usa la persona** (`frontend/`):
 | Parte | Estado |
 |---|---|
 | **A · Motor (Santiago)** | **Versión 1.0 completa** en `backend/`: todas las tareas de F0–F5 del motor (issues cerrados). Contrato v1 exportado en `contrato/` (openapi, JSON Schema y ejemplos). Ejecutable de escritorio y 83 pruebas automáticas. Pendiente solo lo que requiere el casco real: puntos de integración y grabaciones ([integracion.md](integracion.md)). |
-| **B · Interfaz (Jonnathan)** | Por iniciar. Puede trabajar desde ya contra `python -m neuroacceso_motor --demo --dev` y los ejemplos de `contrato/ejemplos/`. |
+| **B · Interfaz (Jonnathan)** | **Versión 1.0 completa** en `frontend/` (rama `interfaz/v1`): todas las tareas de F0–F5 de la interfaz salvo el video demo. 12 pantallas, 390 pruebas, mocks sin backend (`npm run dev:mock`), prueba de humo contra el motor real (9/9) y [auditoría de accesibilidad](auditoria-accesibilidad.md) sin problemas. Pendiente lo que requiere el casco real: puntos de integración. |
 
 ## 3. Plan por fases
 
